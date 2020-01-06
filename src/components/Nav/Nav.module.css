@@ -1,0 +1,36 @@
+.wrapper {
+    float: left;
+    height: 80px;
+    text-align: left;
+}
+
+.wrapper ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-size: 0;
+}
+
+.wrapper  ul>li {
+    font-size: 14px;
+    font-family: 'Roboto Condensed', sans-serif;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.wrapper ul>li>a {
+    display: block;
+    line-height: 80px;
+    padding: 0 20px;
+    color: #777;
+    transition: color ease .2s;
+    text-decoration: none;
+}
+.wrapper ul>li>a:hover {
+    color: #f5bb00
+}
+
+.wrapper  ul>li>a.active {
+    background-color: #f5bb00;
+    color: #fff;
+}
