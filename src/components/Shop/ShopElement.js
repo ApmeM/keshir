@@ -7,10 +7,11 @@ class ShopElement extends React.Component {
         return <div>
             <div className={styles.productName}>{this.props.product.name}</div>
             <div><NavLink to={`/product/${this.props.product.id}`}>{this.props.product.name}</NavLink></div>
-            <div>{this.props.product.description}</div>
+            <div dangerouslySetInnerHTML={{__html: this.props.product.description}}></div>
             <div>
                 <button>Read more</button>
             </div>
+            <hr></hr>
         </div>;
     }
 }
