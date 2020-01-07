@@ -1,13 +1,14 @@
 import React from "react";
-import {connect} from "react-redux";
-import ShopElement from "./ShopElement";
-import {fetchProducts} from "../../redux/productsReducer";
+import {connect} from "react-redux";                          
+import {fetchShop} from "./ShopReducer";
+import styles from './Shop.module.css'
+import ProductCard from "../ProductCard/ProductCardContainer";
 import Spinner from "../Spinner/Spinner";
 import Error from "../Error/Error";
 
 class ShopContainer extends React.Component {
     componentDidMount() {
-      this.props.fetchProducts();
+      this.props.fetchShop();
     }
 
     render() {
@@ -17,12 +18,15 @@ class ShopContainer extends React.Component {
         if (this.props.failed){
             return <Error message="something goes wrong"/>
         }
+
         return <div>
-          { this.props.products.map( p => 
-            <ShopElement key={p.id} {...this.props} product={p} />
+          { this.props.products.map( p =>
+            <div key={p.id} className={styles.shopElement}> 
+                <ProductCard {...this.props} productCard={p} />
+            </div>
           )}
         </div>
     }
 }
-const mapStateToProps = state => state.products
-export default connect(mapStateToProps, {fetchProducts})(ShopContainer)
+const mapStateToProps = state => state.shop
+export default connect(mapStateToProps, {fetchShop})(ShopContainer)

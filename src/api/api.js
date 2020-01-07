@@ -6,14 +6,12 @@ const instanse = axios.create({
     baseURL: 'https://docs.google.com/'
 });
 
-export const postAPI = {
-    getProducts() {
-        return instanse.get('/spreadsheets/d/e/2PACX-1vTR3vyNCfIEo8rJm_5QeRCYFjppQlCMFdJ5zMCHp-LU-OdoS669zmZJhio_iXGSHKPKQVuE7mg6ALfb/pub?gid=0&single=true&output=csv')
+const cache = instanse.get('/spreadsheets/d/e/2PACX-1vTR3vyNCfIEo8rJm_5QeRCYFjppQlCMFdJ5zMCHp-LU-OdoS669zmZJhio_iXGSHKPKQVuE7mg6ALfb/pub?gid=0&single=true&output=csv')
             .then(response => {
                 return new Promise((resolve, reject) =>{
                     const results = [];
                     const s = new Readable();
-                    var idx = 0;
+                    var idx = 2;
                     s._read = () => {}; // redundant? see update below
                     s.push(response.data);
                     s.push(null);
@@ -24,5 +22,15 @@ export const postAPI = {
                      });
                 });
             });
+
+
+
+export const postAPI = {
+    getProduct(id) {
+        return cache.then(products => products.filter(p => p.id === id)[0]);
+    },
+    
+    getShop() {
+        return cache;
     }
 };
