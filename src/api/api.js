@@ -27,7 +27,7 @@ const cache = instanse.get('/spreadsheets/d/e/2PACX-1vTR3vyNCfIEo8rJm_5QeRCYFjpp
 
 export const postAPI = {
     getProduct(id) {
-        return cache.then(products => products.filter(p => p.id === id)[0]);
+        return cache.then(products => products.filter(p => p.id == id)[0]);
     },
     
     getShop() {

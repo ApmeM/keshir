@@ -5,6 +5,7 @@ import store from "./AppStore";
 
 import Header from "./components/Header/Header";
 import NewsContainer from "./components/News/NewsContainer";
+import ProductContainer from "./components/Product/ProductContainer";
 import ShopContainer from "./components/Shop/ShopContainer";
 import AboutContainer from "./components/About/AboutContainer";
 
@@ -18,6 +19,7 @@ function App() {
             <Header/>
             <div className={styles.content}>
               <Route path="/" exact render={() => <NewsContainer/>}/>
+              <Route path="/product/:productId" render={() => <ProductContainer/>}/>
               <Route path="/shop" render={() => <ShopContainer/>}/>
               <Route path="/about" render={() => <AboutContainer/>}/>
             </div>

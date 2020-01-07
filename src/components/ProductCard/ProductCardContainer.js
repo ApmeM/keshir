@@ -11,11 +11,8 @@ class ProductCardContainer extends React.Component {
 
         return <div>
             <div className={styles.productName}>{this.props.productCard.name}</div>
-            <div><NavLink to={`/product/${this.props.productCard.id}`}>{this.props.productCard.name}</NavLink></div>
             <div dangerouslySetInnerHTML={{__html: this.props.productCard.description}}></div>
-            <div>
-                <button>Read more</button>
-            </div>
+            <div><NavLink to={`/product/${this.props.productCard.id}`}>Read more &gt;&gt; </NavLink></div>
             <hr></hr>
         </div>;
     }

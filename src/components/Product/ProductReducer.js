@@ -8,9 +8,9 @@ export const fetchProductRequest = () => ({type: FETCH_PRODUCT_REQUEST});
 export const fetchProductSuccess = (product) => ({type: FETCH_PRODUCT_SUCCESS, product});
 export const fetchProductFailed = () => ({type: FETCH_PRODUCT_FAILED});
 
-export const fetchProduct = () => function(dispatch) {
+export const fetchProduct = (productId) => function(dispatch) {
     dispatch(fetchProductRequest());
-    postAPI.getProduct()
+    postAPI.getProduct(productId)
     .then(product=>{
         dispatch(fetchProductSuccess(product))
     })
@@ -22,7 +22,7 @@ export const fetchProduct = () => function(dispatch) {
 export default (state = {
     isFetching: false,
     failed: false,
-    products: {}
+    product: {}
 }, action)  => {
     switch (action.type) {
         case FETCH_PRODUCT_REQUEST:
