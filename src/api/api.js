@@ -11,12 +11,11 @@ const cache = instanse.get('/spreadsheets/d/e/2PACX-1vTR3vyNCfIEo8rJm_5QeRCYFjpp
                 return new Promise((resolve, reject) =>{
                     const results = [];
                     const s = new Readable();
-                    var idx = 2;
                     s._read = () => {}; // redundant? see update below
                     s.push(response.data);
                     s.push(null);
                     s.pipe(csv())
-                     .on('data', (data) => results.push({...data, id: idx++}))
+                     .on('data', (data) => results.push(data))
                      .on('end', () => {
                          resolve(results);
                      });
@@ -27,7 +26,7 @@ const cache = instanse.get('/spreadsheets/d/e/2PACX-1vTR3vyNCfIEo8rJm_5QeRCYFjpp
 
 export const postAPI = {
     getProduct(id) {
-        return cache.then(products => products.filter(p => p.id == id)[0]);
+        return cache.then(products => products.filter(p => p.id === id)[0]);
     },
     
     getShop() {

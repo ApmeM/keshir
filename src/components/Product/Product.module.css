@@ -1,4 +1,11 @@
 .productHeader {
    font-size: 64px;
 }
-
+.productImageCarousel {
+    border: 1px solid black;
+    float: left;
+}
+.productImage {
+    width: 300px;
+    height: 300px;
+}

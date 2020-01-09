@@ -1,5 +1,9 @@
 
 .productName {
-   font-size: 32px;
+    font-size: 32px;
 }
-
+.productThumbnail {
+    float: left;
+    width: 100px;
+    height: 100px;
+}

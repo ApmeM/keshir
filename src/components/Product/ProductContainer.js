@@ -2,7 +2,6 @@ import React from "react";
 import {connect} from "react-redux";                          
 import {fetchProduct} from "./ProductReducer";
 import styles from './Product.module.css'
-import ProductCard from "../ProductCard/ProductCardContainer";
 import Spinner from "../Spinner/Spinner";
 import Error from "../Error/Error";
 import {withRouter} from "react-router-dom";
@@ -25,8 +24,13 @@ class ProductContainer extends React.Component {
         }
 
         return <div>
-            <div className={styles.productHeader}>{this.props.product.name}</div>
-            <div dangerouslySetInnerHTML={{__html: this.props.product.description}}></div>
+            <div class={styles.productImageCarousel}>
+                <img className={styles.productImage} src={this.props.product.thumbnail} alt='product'/>
+            </div>
+            <div>
+                <div className={styles.productHeader}>{this.props.product.name}</div>
+                <div dangerouslySetInnerHTML={{__html: this.props.product.description}}></div>
+            </div>
         </div>;
     }
 }

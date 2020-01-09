@@ -23,12 +23,12 @@ class NewsContainer extends React.Component {
             <div className={styles.newsHeader}>NEWS!!!</div>
             Buy this cool stuff:
             <br/>                                                                                   
-            <ProductCard {...this.props} productCard={ this.props.products.filter(p=>p.id === 6)[0] } />
+            <ProductCard {...this.props} productCard={ this.props.products.filter(p=>p.id === "6")[0] } />
             <br/>
             Or this:
-            <ProductCard {...this.props} productCard={ this.props.products.filter(p=>p.id === 3)[0] } />
+            <ProductCard {...this.props} productCard={ this.props.products.filter(p=>p.id === "3")[0] } />
             Or this:
-            <ProductCard {...this.props} productCard={ this.props.products.filter(p=>p.id === 10)[0] } />
+            <ProductCard {...this.props} productCard={ this.props.products.filter(p=>p.id === "10")[0] } />
         </div>
     }
 }
