@@ -1,11 +1,13 @@
 import React from "react";
 import styles from "./Logo.module.css"; 
-import logo from '../../logo.svg';
+import {NavLink} from "react-router-dom";
 
-const Logo = props => {
-    return <div className={styles.logo}>
-        <img src={logo} alt='logo'/>
-    </div>
-};
+class Logo extends React.Component {
+    render() {
+        return <div className={styles.logo}>
+            <NavLink activeClassName={styles.active} to="/">Keshir</NavLink>
+        </div>
+    }
+}
 
 export default Logo;

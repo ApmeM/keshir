@@ -1,0 +1,7 @@
+.footer {
+    margin: 20px 0 5px;
+    font-family: 'Roboto',Arial,sans-serif;
+    text-transform: uppercase;
+    position: absolute;
+    bottom: 0;
+}

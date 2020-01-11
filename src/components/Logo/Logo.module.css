@@ -1,7 +1,10 @@
-.logo {
-    float: left;
-    height: 80px;
-    width: 80px;
-    margin-right: 20px;
+.logo a {
+    color: #000000;
+    font-size: 38px;
+    line-height: 60px;
+    font-weight: 600;
+    font-family: 'Roboto',Arial,sans-serif;
+    text-decoration: none;
+    text-transform: uppercase;
 }
 

@@ -1,6 +1,5 @@
 .wrapper {
     float: left;
-    height: 80px;
     text-align: left;
 }
 
@@ -14,17 +13,18 @@
 .wrapper  ul>li {
     font-size: 14px;
     font-family: 'Roboto Condensed', sans-serif;
-    text-transform: uppercase;
     display: inline-block;
+    margin-right: 10px;
 }
 
 .wrapper ul>li>a {
     display: block;
-    line-height: 80px;
-    padding: 0 20px;
-    color: #777;
     transition: color ease .2s;
     text-decoration: none;
+    color: #000000;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 0 10px;
 }
 .wrapper ul>li>a:hover {
     color: #f5bb00

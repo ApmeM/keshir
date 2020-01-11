@@ -8,9 +8,9 @@ export const fetchShopRequest = () => ({type: FETCH_SHOP_REQUEST});
 export const fetchShopSuccess = (products) => ({type: FETCH_SHOP_SUCCESS, products});
 export const fetchShopFailed = () => ({type: FETCH_SHOP_FAILED});
 
-export const fetchShop = () => function(dispatch) {
+export const fetchShop = (categoryName) => function(dispatch) {
     dispatch(fetchShopRequest());
-    postAPI.getShop()
+    postAPI.getShop(categoryName)
            .then(products=>{
                dispatch(fetchShopSuccess(products))
             })

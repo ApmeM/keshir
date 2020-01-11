@@ -1,14 +1,23 @@
 import React from "react";
 import styles from "./Nav.module.css";
 import {NavLink} from "react-router-dom";
-const Nav = props => {
-    return <div className={styles.wrapper}>
-        <ul>
-            <li><NavLink exact activeClassName={styles.active} to="/">Keshir</NavLink></li>
-            <li><NavLink activeClassName={styles.active} to="/shop">Shop</NavLink></li>
-            <li><NavLink activeClassName={styles.active} to="/about">About</NavLink></li>
-        </ul>
-    </div>
+
+class Nav extends React.Component {
+    render() {
+        return <div className={styles.wrapper}>
+            <ul>
+                <li>
+                    <NavLink activeClassName={styles.active} to="/shop/Knitting">Пряжа</NavLink>
+                </li>
+                <li>
+                    <NavLink activeClassName={styles.active} to="/shop/Blockers">Блокаторы</NavLink>
+                </li>
+                <li>
+                    <NavLink activeClassName={styles.active} to="/about">Обо мне</NavLink>
+                </li>
+            </ul>
+        </div>
+    }
 }
 
 export default Nav;

@@ -7,3 +7,18 @@
     width: 100px;
     height: 100px;
 }
+
+.table_td {
+    display: inline-block;
+    margin: 0 5% 40px 0;
+    vertical-align: top;
+    width: 30%;
+}
+.table_td:nth-child(3n) {
+    margin: 0;
+}
+.table_td img {
+    display: block;
+    height: auto;
+    width: 100%;
+}

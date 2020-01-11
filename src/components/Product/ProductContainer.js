@@ -23,11 +23,11 @@ class ProductContainer extends React.Component {
             return <Error message="No product found."/>
         }
 
-        return <div>
-            <div class={styles.productImageCarousel}>
-                <img className={styles.productImage} src={this.props.product.thumbnail} alt='product'/>
+        return <div class={styles.productWrap}>
+            <div class={styles.productImage}>
+                <img src={this.props.product.thumbnail} alt='product'/>
             </div>
-            <div>
+            <div class={styles.productDesc}>
                 <div className={styles.productHeader}>{this.props.product.name}</div>
                 <div dangerouslySetInnerHTML={{__html: this.props.product.description}}></div>
             </div>

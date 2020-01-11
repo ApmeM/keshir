@@ -1,11 +1,27 @@
 .productHeader {
    font-size: 64px;
 }
+.productWrap {
+    margin-bottom: 30px;
+}
+.productWrap::after {
+    content: "";
+    display: table;
+    clear: both;
+}
 .productImageCarousel {
-    border: 1px solid black;
-    float: left;
 }
 .productImage {
-    width: 300px;
-    height: 300px;
+    width: 40%;
+    height: auto;
+    margin-right: 5%;
+    float: left;
+}
+.productImage img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.productDesc {
+
 }

@@ -1,7 +1,11 @@
 import React from 'react';
 
-export default props => {
-    return <div>
-        {props.message}
-    </div>;
+class Error extends React.Component {
+    render() {
+        return <div>
+        { this.props.message }
+        </div>;
+    }
 }
+
+export default Error

@@ -1,9 +1,11 @@
 import React from "react";
 
-const AboutContainer = props => {
-    return <div>
+class AboutContainer extends React.Component {
+    render() {
+        return <div>
         About page
-    </div>
+        </div>
+    }
 }
 
 export default AboutContainer;
