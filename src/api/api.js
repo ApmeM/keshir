@@ -37,8 +37,22 @@ export const postAPI = {
         return cache.then(products => products.filter(p => p.id === id)[0]);
     },
     
-    getShop(categoryName) {
-        return cache.then(products => products.filter(p => p.category === categoryName));
+    getTypes(categoryName) {
+        return cache.then(
+            products => {
+                let result = products
+                    .filter(p => p.category === categoryName)
+                    .map(p => p.type)
+                    .filter(p => p !== "")
+                    .filter((elem, pos, arr) => arr.indexOf(elem) === pos);
+                result.unshift("All");
+                return result;
+            }
+        );
+    },
+
+    getProducts(categoryName, typeName) {
+        return cache.then(products => products.filter(p => p.category === categoryName && (p.type === typeName || typeName === "All")));
     },
 
     getNews(productIds) {

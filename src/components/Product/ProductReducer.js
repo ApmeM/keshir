@@ -1,8 +1,8 @@
 import {postAPI} from "../../api/api";
 
-const FETCH_PRODUCT_REQUEST = 'FETCH_PRODUCTS_REQUEST';
-const FETCH_PRODUCT_SUCCESS = 'FETCH_PRODUCTS_SUCCESS';
-const FETCH_PRODUCT_FAILED = 'FETCH_PRODUCTS_FAILED';
+const FETCH_PRODUCT_REQUEST = 'FETCH_PRODUCT_REQUEST';
+const FETCH_PRODUCT_SUCCESS = 'FETCH_PRODUCT_SUCCESS';
+const FETCH_PRODUCT_FAILED = 'FETCH_PRODUCT_FAILED';
 
 export const fetchProductRequest = () => ({type: FETCH_PRODUCT_REQUEST});
 export const fetchProductSuccess = (product) => ({type: FETCH_PRODUCT_SUCCESS, product});

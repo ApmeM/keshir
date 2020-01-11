@@ -1,8 +1,9 @@
 import React from "react";
 import {connect} from "react-redux";                          
-import {fetchShop} from "./ShopReducer";
+import {fetchTypes, fetchProducts} from "./ShopReducer";
 import styles from './Shop.module.css'
-import ProductCard from "../ProductCard/ProductCardContainer";
+import ShopHeader from "./ShopHeader/ShopHeader";
+import ShopContent from "./ShopContent/ShopContent";
 import Spinner from "../Spinner/Spinner";
 import Error from "../Error/Error";
 import {withRouter} from "react-router-dom";
@@ -23,14 +24,14 @@ class ShopContainer extends React.Component {
     componentDidMount() {
         if(this.state.needReload)
         {
-            this.props.fetchShop(this.state.categoryName);
+            this.props.fetchTypes(this.state.categoryName);
         }
     }
 
     componentDidUpdate() {
         if(this.state.needReload)
         {
-            this.props.fetchShop(this.state.categoryName);
+            this.props.fetchTypes(this.state.categoryName);
         }
     }
 
@@ -43,11 +44,10 @@ class ShopContainer extends React.Component {
         }
 
         return <div className={styles.shop}>
-          { this.props.products.map( p =>
-                <ProductCard key={p.id} {...this.props} productCard={p} />
-          )}
+            <ShopHeader {...this.props.types} fetchProducts={(type)=>this.props.fetchProducts(this.state.categoryName, type)}/>
+            <ShopContent {...this.props.products}/>
         </div>
     }
 }
 const mapStateToProps = state => state.shop
-export default connect(mapStateToProps, {fetchShop})(withRouter(ShopContainer))
+export default connect(mapStateToProps, {fetchTypes, fetchProducts})(withRouter(ShopContainer))
