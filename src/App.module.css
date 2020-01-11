@@ -1,6 +1,8 @@
 .wrapper {
     width: 800px;
     margin: 0 auto;
+    padding-bottom: 70px;
+    position: relative;
 }
 .content {
     padding-top:20px;

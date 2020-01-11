@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";                          
-import {fetchShop} from "../Shop/ShopReducer";
+import {fetchNews} from "./NewsReducer";
 import styles from './News.module.css'
 import ProductCard from "../ProductCard/ProductCardContainer";
 import Spinner from "../Spinner/Spinner";
@@ -8,7 +8,7 @@ import Error from "../Error/Error";
 
 class NewsContainer extends React.Component {
     componentDidMount() {
-      this.props.fetchShop();
+      this.props.fetchNews(["3", "6", "10"]);
     }
 
     render() {
@@ -26,5 +26,5 @@ class NewsContainer extends React.Component {
         </div>
     }
 }
-const mapStateToProps = state => state.shop
-export default connect(mapStateToProps, {fetchShop})(NewsContainer)
+const mapStateToProps = state => state.news
+export default connect(mapStateToProps, {fetchNews})(NewsContainer)

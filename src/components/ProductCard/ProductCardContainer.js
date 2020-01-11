@@ -13,9 +13,10 @@ class ProductCardContainer extends React.Component {
 
             <NavLink to={`/product/${this.props.productCard.id}`}>
                 <img className={styles.productThumbnail} src={this.props.productCard.thumbnail} alt='thumbnail'/>
-                <div className={styles.productName}>{this.props.productCard.name}</div>
+                <div className={styles.productName}>{this.props.productCard.type} {this.props.productCard.name}</div>
             </NavLink>
-            <div dangerouslySetInnerHTML={{__html: this.props.productCard.description}}></div>
+            <div className={styles.productPrice}>{this.props.productCard.price}</div>
+            <div dangerouslySetInnerHTML={{__html: this.props.productCard.description}} className={styles.productDescription}></div>
         </div>;
     }
 }

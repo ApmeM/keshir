@@ -28,8 +28,10 @@ class ProductContainer extends React.Component {
                 <img src={this.props.product.thumbnail} alt='product'/>
             </div>
             <div class={styles.productDesc}>
-                <div className={styles.productHeader}>{this.props.product.name}</div>
-                <div dangerouslySetInnerHTML={{__html: this.props.product.description}}></div>
+                <div className={styles.productName}>{this.props.product.name}</div>
+                <div className={styles.productPrice}>{this.props.product.price}</div>
+                <div dangerouslySetInnerHTML={{__html: this.props.product.description}} className={styles.productDescription}></div>
+                <div dangerouslySetInnerHTML={{__html: this.props.product.characteristics}} className={styles.productCharacteristics}></div>
             </div>
         </div>;
     }

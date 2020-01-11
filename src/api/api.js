@@ -38,6 +38,10 @@ export const postAPI = {
     },
     
     getShop(categoryName) {
-        return cache.then(products => products.filter(p => p.category === categoryName || categoryName === undefined));
+        return cache.then(products => products.filter(p => p.category === categoryName));
+    },
+
+    getNews(productIds) {
+        return cache.then(products => products.filter(p => productIds.includes(p.id)));
     }
 };
