@@ -12,16 +12,20 @@ export const fetchTypesRequest = () => ({type: FETCH_TYPES_REQUEST});
 export const fetchTypesSuccess = (types) => ({type: FETCH_TYPES_SUCCESS, types});
 export const fetchTypesFailed = () => ({type: FETCH_TYPES_FAILED});
 
-export const fetchProductsRequest = () => ({type: FETCH_PRODUCTS_REQUEST});
+export const fetchProductsRequest = (typeName) => ({type: FETCH_PRODUCTS_REQUEST, typeName});
 export const fetchProductsSuccess = (products) => ({type: FETCH_PRODUCTS_SUCCESS, products});
 export const fetchProductsFailed = () => ({type: FETCH_PRODUCTS_FAILED});
 
-export const fetchTypes = (categoryName) => function(dispatch) {
+export const fetchTypes = (categoryName, defaultType) => function(dispatch) {
     dispatch(fetchTypesRequest());
     postAPI.getTypes(categoryName)
            .then(types=>{
                 dispatch(fetchTypesSuccess(types));
-                fetchProducts(categoryName, types[0])(dispatch);
+                let type = types[0];
+                if (types.includes(defaultType)){
+                   type = defaultType;
+                }
+                fetchProducts(categoryName, type)(dispatch);
             })
             .catch(error => {
                 dispatch(fetchTypesFailed())
@@ -29,7 +33,7 @@ export const fetchTypes = (categoryName) => function(dispatch) {
 }
 
 export const fetchProducts = (categoryName, typeName) => function(dispatch) {
-    dispatch(fetchProductsRequest());
+    dispatch(fetchProductsRequest(typeName));
     postAPI.getProducts(categoryName, typeName)
            .then(products=>{
                dispatch(fetchProductsSuccess(products))
@@ -48,19 +52,21 @@ export default (state = {
     types: {
         isFetching: false,
         failed: false,
-        types: []
+        types: [],
+        currentType: "All"
     }
 }, action)  => {
     switch (action.type) {
         case FETCH_TYPES_REQUEST:
             return {
                 ...state,
-                types: {isFetching: true}
+                types: {...state.types, isFetching: true}
             }
         case FETCH_TYPES_SUCCESS:
             return {
                 ...state,
                 types: {
+                    ...state.types,
                     isFetching: false,
                     types: action.types
                 }
@@ -69,6 +75,7 @@ export default (state = {
             return {
                 ...state,
                 types: {
+                    ...state.types,
                     isFetching: false,
                     failed: true
                 }
@@ -76,12 +83,14 @@ export default (state = {
         case FETCH_PRODUCTS_REQUEST:
             return {
                 ...state,
-                products: {isFetching: true}
+                products: {...state.products, isFetching: true},
+                types: {...state.types, currentType: action.typeName}
             }
         case FETCH_PRODUCTS_SUCCESS:
             return {
                 ...state,
                 products: {
+                    ...state.products,
                     isFetching: false,
                     products: action.products
                 }
@@ -90,6 +99,7 @@ export default (state = {
             return {
                 ...state,
                 products: {
+                    ...state.products,
                     isFetching: false,
                     failed: true
                 }

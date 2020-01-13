@@ -8,7 +8,7 @@ import Error from "../Error/Error";
 
 class NewsContainer extends React.Component {
     componentDidMount() {
-      this.props.fetchNews(["3", "6", "10"]);
+      this.props.fetchNews(["1", "3", "10"]);
     }
 
     render() {
@@ -20,7 +20,7 @@ class NewsContainer extends React.Component {
         }
 
         return <div className={styles.news}>
-            <ProductCard {...this.props} productCard={ this.props.products.filter(p=>p.id === "6")[0] } />
+            <ProductCard {...this.props} productCard={ this.props.products.filter(p=>p.id === "1")[0] } />
             <ProductCard {...this.props} productCard={ this.props.products.filter(p=>p.id === "3")[0] } />
             <ProductCard {...this.props} productCard={ this.props.products.filter(p=>p.id === "10")[0] } />
         </div>

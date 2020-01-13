@@ -14,8 +14,15 @@ class ShopHeader extends React.Component {
 
         return <div className={styles.shopHeader}>
             <ul className={styles.shopTypeList}>
-              { this.props.types.map( t =>
-                    <li><button key={t} onClick={() => this.props.fetchProducts(t)} alt={this.props.description}>{t}</button></li>
+              { this.props.types.map( t => {
+                      return <li key={t}>
+                          <button
+                            onClick={() => this.props.fetchProducts(t)}
+                            alt={this.props.description}
+                            className={'' + (this.props.currentType === t ? styles.active : '')}
+                            >{t}</button>
+                      </li>
+                  }
               )}
             </ul>
         </div>

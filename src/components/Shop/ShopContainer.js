@@ -24,14 +24,14 @@ class ShopContainer extends React.Component {
     componentDidMount() {
         if(this.state.needReload)
         {
-            this.props.fetchTypes(this.state.categoryName);
+            this.props.fetchTypes(this.state.categoryName, this.props.types.currentType);
         }
     }
 
     componentDidUpdate() {
         if(this.state.needReload)
         {
-            this.props.fetchTypes(this.state.categoryName);
+            this.props.fetchTypes(this.state.categoryName, this.props.types.currentType);
         }
     }
 
