@@ -1,6 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";                          
 import {fetchProduct} from "./ProductReducer";
+import {addProduct} from "../ShoppingCart/ShoppingCartReducer";
 import styles from './Product.module.css'
 import Spinner from "../Spinner/Spinner";
 import Error from "../Error/Error";
@@ -33,8 +34,11 @@ class ProductContainer extends React.Component {
                 <div dangerouslySetInnerHTML={{__html: this.props.product.description}} className={styles.productDescription}></div>
                 <div dangerouslySetInnerHTML={{__html: this.props.product.characteristics}} className={styles.productCharacteristics}></div>
             </div>
+            <div>
+                <button onClick={()=> this.props.addProduct(this.props.product)}>Add to cart.</button>
+            </div>
         </div>;
     }
 }
 const mapStateToProps = state => state.product
-export default connect(mapStateToProps, {fetchProduct})(withRouter(ProductContainer))
+export default connect(mapStateToProps, {fetchProduct, addProduct})(withRouter(ProductContainer))

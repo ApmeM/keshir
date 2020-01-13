@@ -9,6 +9,7 @@ import NewsContainer from "./components/News/NewsContainer";
 import ProductContainer from "./components/Product/ProductContainer";
 import ShopContainer from "./components/Shop/ShopContainer";
 import AboutContainer from "./components/About/AboutContainer";
+import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
 
 import styles from "./App.module.css";
 
@@ -23,6 +24,7 @@ class App extends React.Component {
                             <Route path="/" exact render={() => <NewsContainer/>}/>
                             <Route path="/product/:productId" render={() => <ProductContainer/>}/>
                             <Route path="/shop/:categoryName" render={() => <ShopContainer/>}/>
+                            <Route path="/cart" render={() => <ShoppingCart/>}/>
                             <Route path="/about" render={() => <AboutContainer/>}/>
                         </div>
                         <Footer/>

@@ -18,7 +18,6 @@ class ShopHeader extends React.Component {
                       return <li key={t}>
                           <button
                             onClick={() => this.props.fetchProducts(t)}
-                            alt={this.props.description}
                             className={'' + (this.props.currentType === t ? styles.active : '')}
                             >{t}</button>
                       </li>
