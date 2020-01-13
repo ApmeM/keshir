@@ -8,7 +8,7 @@ import Spinner from "../Spinner/Spinner";
 import Error from "../Error/Error";
 import {withRouter} from "react-router-dom";
 
-class ShopContainer extends React.Component {
+class Shop extends React.Component {
     state = {
         categoryName: '',
         needReload: true
@@ -50,4 +50,4 @@ class ShopContainer extends React.Component {
     }
 }
 const mapStateToProps = state => state.shop
-export default connect(mapStateToProps, {fetchTypes, fetchProducts})(withRouter(ShopContainer))
+export default connect(mapStateToProps, {fetchTypes, fetchProducts})(withRouter(Shop))

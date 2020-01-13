@@ -7,7 +7,7 @@ import Spinner from "../Spinner/Spinner";
 import Error from "../Error/Error";
 import {withRouter} from "react-router-dom";
 
-class ProductContainer extends React.Component {
+class Product extends React.Component {
     componentDidMount() {
       this.props.fetchProduct(this.props.match.params.productId);
     }
@@ -41,4 +41,4 @@ class ProductContainer extends React.Component {
     }
 }
 const mapStateToProps = state => state.product
-export default connect(mapStateToProps, {fetchProduct, addProduct})(withRouter(ProductContainer))
+export default connect(mapStateToProps, {fetchProduct, addProduct})(withRouter(Product))

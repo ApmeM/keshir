@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";                          
 import {increaseCount, decreaseCount, removeProduct} from "./ShoppingCartReducer";
 import styles from './ShoppingCart.module.css'
-import ProductCard from "../ProductCard/ProductCardContainer";
+import ProductCard from "../ProductCard/ProductCard";
 import Error from "../Error/Error";
 
 class ShoppingCart extends React.Component {

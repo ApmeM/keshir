@@ -3,7 +3,7 @@ import Error from "../Error/Error";
 import styles from './ProductCard.module.css'
 import {NavLink} from "react-router-dom";
 
-class ProductCardContainer extends React.Component {
+class ProductCard extends React.Component {
     render() {
         if(this.props.productCard === undefined){
             return <div className={styles.table_td}><Error message="No product found."/></div>
@@ -20,4 +20,4 @@ class ProductCardContainer extends React.Component {
         </div>;
     }
 }
-export default ProductCardContainer
+export default ProductCard

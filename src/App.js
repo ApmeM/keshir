@@ -5,10 +5,10 @@ import store from "./AppStore";
 
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import NewsContainer from "./components/News/NewsContainer";
-import ProductContainer from "./components/Product/ProductContainer";
-import ShopContainer from "./components/Shop/ShopContainer";
-import AboutContainer from "./components/About/AboutContainer";
+import News from "./components/News/News";
+import Product from "./components/Product/Product";
+import Shop from "./components/Shop/Shop";
+import About from "./components/About/About";
 import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
 
 import styles from "./App.module.css";
@@ -21,11 +21,11 @@ class App extends React.Component {
                     <div className={styles.wrapper}>
                         <Header/>
                         <div className={styles.content}>
-                            <Route path="/" exact render={() => <NewsContainer/>}/>
-                            <Route path="/product/:productId" render={() => <ProductContainer/>}/>
-                            <Route path="/shop/:categoryName" render={() => <ShopContainer/>}/>
+                            <Route path="/" exact render={() => <News/>}/>
+                            <Route path="/product/:productId" render={() => <Product/>}/>
+                            <Route path="/shop/:categoryName" render={() => <Shop/>}/>
                             <Route path="/cart" render={() => <ShoppingCart/>}/>
-                            <Route path="/about" render={() => <AboutContainer/>}/>
+                            <Route path="/about" render={() => <About/>}/>
                         </div>
                         <Footer/>
                     </div>

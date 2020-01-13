@@ -2,11 +2,11 @@ import React from "react";
 import {connect} from "react-redux";                          
 import {fetchNews} from "./NewsReducer";
 import styles from './News.module.css'
-import ProductCard from "../ProductCard/ProductCardContainer";
+import ProductCard from "../ProductCard/ProductCard";
 import Spinner from "../Spinner/Spinner";
 import Error from "../Error/Error";
 
-class NewsContainer extends React.Component {
+class News extends React.Component {
     componentDidMount() {
       this.props.fetchNews(["1", "3", "10"]);
     }
@@ -27,4 +27,4 @@ class NewsContainer extends React.Component {
     }
 }
 const mapStateToProps = state => state.news
-export default connect(mapStateToProps, {fetchNews})(NewsContainer)
+export default connect(mapStateToProps, {fetchNews})(News)

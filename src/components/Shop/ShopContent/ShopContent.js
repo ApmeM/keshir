@@ -2,7 +2,7 @@ import React from "react";
 import styles from './ShopContent.module.css'
 import Spinner from "../../Spinner/Spinner";
 import Error from "../../Error/Error";
-import ProductCard from "../../ProductCard/ProductCardContainer";
+import ProductCard from "../../ProductCard/ProductCard";
 
 class ShopContent extends React.Component {
     render() {
