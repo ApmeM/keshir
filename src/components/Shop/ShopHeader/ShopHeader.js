@@ -13,9 +13,11 @@ class ShopHeader extends React.Component {
         }
 
         return <div className={styles.shopHeader}>
-          { this.props.types.map( t =>
-                <button key={t} onClick={() => this.props.fetchProducts(t)}>{t}</button>
-          )}
+            <ul className={styles.shopTypeList}>
+              { this.props.types.map( t =>
+                    <li><button key={t} onClick={() => this.props.fetchProducts(t)} alt={this.props.description}>{t}</button></li>
+              )}
+            </ul>
         </div>
     }
 }

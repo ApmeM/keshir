@@ -1,5 +1,6 @@
 .productName {
     font-size: 30px;
+    line-height: 1.1;
     margin-bottom: 10px;
 }
 
@@ -36,4 +37,12 @@
 .productDesc {
     float: left;
     width: 55%;
+}
+
+.productPrice {
+    margin-bottom: 50px;
+}
+.productPrice div {
+    font-weight: 800;
+    display: inline;
 }

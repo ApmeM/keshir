@@ -1,4 +1,23 @@
-
+.shopTypeList {
+    margin: 10px 0 30px;
+    padding: 0;
+}
+.shopTypeList li {
+    display: inline-block;
+    margin-right: 30px;
+    padding: 0 5px;
+}
+.shopTypeList button,
+.shopTypeList button:focus {
+    background: none;
+    border: none;
+    outline: none;
+}
+.shopTypeList button.active,
+.shopTypeList button:hover {
+    color: #f5bb00;
+    border: none;
+}
 .shopElement {
    font-border: solid black 1px;
 }

@@ -29,7 +29,7 @@ class ProductContainer extends React.Component {
             </div>
             <div className={styles.productDesc}>
                 <div className={styles.productName}>{this.props.product.name}</div>
-                <div className={styles.productPrice}>{this.props.product.price}</div>
+                <div className={styles.productPrice}><div>{this.props.product.price}</div> {this.props.product.currency}</div>
                 <div dangerouslySetInnerHTML={{__html: this.props.product.description}} className={styles.productDescription}></div>
                 <div dangerouslySetInnerHTML={{__html: this.props.product.characteristics}} className={styles.productCharacteristics}></div>
             </div>
