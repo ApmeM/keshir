@@ -1,14 +1,27 @@
 import React from "react";
 import {connect} from "react-redux";                          
-import {increaseCount, decreaseCount, removeProduct} from "./ShoppingCartReducer";
+import {increaseCount, decreaseCount, removeProduct, fetchShoppingCart} from "./ShoppingCartReducer";
 import styles from './ShoppingCart.module.css'
+import Spinner from "../Spinner/Spinner";
 import Error from "../Error/Error";
 import {NavLink} from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faMinus, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 class ShoppingCart extends React.Component {
+    componentDidMount() {
+        this.props.fetchShoppingCart();
+    }
+
     render() {
+        if (this.props.isFetching) {
+            return <Spinner/>
+        }
+
+        if (this.props.failed){
+            return <Error message="something goes wrong"/>
+        }
+
         if(this.props.products.length === 0){
             return <Error message="Ваша корзина пуста."/>
         }
@@ -52,4 +65,4 @@ class ShoppingCart extends React.Component {
     }
 }
 const mapStateToProps = state => state.shoppingCart
-export default connect(mapStateToProps, {increaseCount, decreaseCount, removeProduct})(ShoppingCart)
+export default connect(mapStateToProps, {increaseCount, decreaseCount, removeProduct, fetchShoppingCart})(ShoppingCart)
