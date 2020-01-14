@@ -46,3 +46,15 @@
     font-weight: 800;
     display: inline;
 }
+.addCart {
+    font-size: 24px;
+    border: none;
+    background: none;
+    position: relative;
+    top: 3px;
+}
+.addCart:hover,
+.addCart:focus {
+    color: #ffa500;
+    outline: none;
+}

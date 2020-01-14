@@ -34,3 +34,9 @@
     background-color: #f5bb00;
     color: #fff;
 }
+.navCart {
+    position: relative;
+}
+.navCart span {
+    margin-right: 5px;
+}

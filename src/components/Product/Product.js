@@ -6,6 +6,8 @@ import styles from './Product.module.css'
 import Spinner from "../Spinner/Spinner";
 import Error from "../Error/Error";
 import {withRouter} from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 
 class Product extends React.Component {
     componentDidMount() {
@@ -30,12 +32,10 @@ class Product extends React.Component {
             </div>
             <div className={styles.productDesc}>
                 <div className={styles.productName}>{this.props.product.name}</div>
-                <div className={styles.productPrice}><div>{this.props.product.price}</div> {this.props.product.currency}</div>
+                <div className={styles.productPrice}><button onClick={()=> this.props.addProduct(this.props.product)} className={styles.addCart}><FontAwesomeIcon icon={faCartPlus} /></button> <div>{this.props.product.price}</div> {this.props.product.currency}</div>
+
                 <div dangerouslySetInnerHTML={{__html: this.props.product.description}} className={styles.productDescription}></div>
                 <div dangerouslySetInnerHTML={{__html: this.props.product.characteristics}} className={styles.productCharacteristics}></div>
-            </div>
-            <div>
-                <button onClick={()=> this.props.addProduct(this.props.product)}>Add to cart.</button>
             </div>
         </div>;
     }
