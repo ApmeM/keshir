@@ -3,8 +3,8 @@ import {connect} from "react-redux";
 import styles from "./Nav.module.css";
 import {NavLink} from "react-router-dom";
 import {fetchShoppingCart} from "../ShoppingCart/ShoppingCartReducer";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faShoppingCart} from '@fortawesome/free-solid-svg-icons'
 
 class Nav extends React.Component {
     componentDidMount() {
@@ -13,7 +13,7 @@ class Nav extends React.Component {
 
     render() {
         // ToDo: move calculations to somewhere else
-        let productsCount = this.props.products.reduce((acc, value) => acc + value.count, 0)
+        let productsCount = this.props.products.reduce((acc, value) => acc + value.count, 0);
 
         return <div className={styles.wrapper}>
             <ul>
@@ -27,12 +27,13 @@ class Nav extends React.Component {
                     <NavLink activeClassName={styles.active} to="/about">Оплата и доставка</NavLink>
                 </li>
                 <li>
-                    <NavLink activeClassName={styles.active} className={styles.navCart} to="/cart"><FontAwesomeIcon icon={faShoppingCart} /> {productsCount === 0 ? "" : productsCount}</NavLink>
+                    <NavLink activeClassName={styles.active} className={styles.navCart} to="/cart"><FontAwesomeIcon
+                        icon={faShoppingCart}/> {productsCount === 0 ? "" : productsCount}</NavLink>
                 </li>
             </ul>
         </div>
     }
 }
 
-const mapStateToProps = state => state.shoppingCart
+const mapStateToProps = state => state.shoppingCart;
 export default connect(mapStateToProps, {fetchShoppingCart})(Nav)

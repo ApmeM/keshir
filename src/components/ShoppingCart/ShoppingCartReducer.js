@@ -1,50 +1,50 @@
 import {postAPI} from "../../api/api";
 
-const ADD_PRODUCT  = 'ADD_PRODUCT';
-const CHANGE_COUNT  = 'CHANGE_COUNT';
-const REMOVE_PRODUCT  = 'REMOVE_PRODUCT';
+const ADD_PRODUCT = 'ADD_PRODUCT';
+const CHANGE_COUNT = 'CHANGE_COUNT';
+const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 
 const FETCH_SHOPPINGCART_SUCCESS = 'FETCH_SHOPPINGCART_SUCCESS';
 const FETCH_SHOPPINGCART_REQUEST = 'FETCH_SHOPPINGCART_REQUEST';
-const FETCH_SHOPPINGCART_FAILED  = 'FETCH_SHOPPINGCART_FAILED';
+const FETCH_SHOPPINGCART_FAILED = 'FETCH_SHOPPINGCART_FAILED';
 
-export const addProduct = (product) => function(dispatch) {
+export const addProduct = (product) => function (dispatch) {
     dispatch({type: ADD_PRODUCT, product});
     postAPI.addProductShoppingCart(product);
-}
-export const increaseCount = (productId) => function(dispatch) {
+};
+export const increaseCount = (productId) => function (dispatch) {
     dispatch({type: CHANGE_COUNT, productId, count: 1});
     postAPI.changeCountShoppingCart(productId, 1);
-}
-export const decreaseCount = (productId) => function(dispatch) {
+};
+export const decreaseCount = (productId) => function (dispatch) {
     dispatch({type: CHANGE_COUNT, productId, count: -1});
     postAPI.changeCountShoppingCart(productId, -1);
-}
-export const removeProduct = (productId) => function(dispatch) {
+};
+export const removeProduct = (productId) => function (dispatch) {
     dispatch({type: REMOVE_PRODUCT, productId});
-    postAPI.removeProductShoppingCart(productId,1);
-}
+    postAPI.removeProductShoppingCart(productId, 1);
+};
 
 export const fetchShoppingCartRequest = () => ({type: FETCH_SHOPPINGCART_REQUEST});
 export const fetchShoppingCartSuccess = (products) => ({type: FETCH_SHOPPINGCART_SUCCESS, products});
 export const fetchShoppingCartFailed = () => ({type: FETCH_SHOPPINGCART_FAILED});
 
-export const fetchShoppingCart = () => function(dispatch) {
+export const fetchShoppingCart = () => function (dispatch) {
     dispatch(fetchShoppingCartRequest());
     postAPI.getShoppingCart()
-        .then(products=>{
+        .then(products => {
             dispatch(fetchShoppingCartSuccess(products))
         })
         .catch(error => {
             dispatch(fetchShoppingCartFailed())
         });
-}
+};
 
 export default (state = {
     isFetching: false,
     failed: false,
     products: []
-}, action)  => {
+}, action) => {
     switch (action.type) {
         case FETCH_SHOPPINGCART_REQUEST:
             return {
@@ -67,7 +67,7 @@ export default (state = {
             let products = [...state.products];
 
             let foundIndex = products.findIndex(p => p.id === action.product.id);
-            if(foundIndex >= 0){
+            if (foundIndex >= 0) {
                 products[foundIndex].count++;
             } else {
                 products.push({...action.product, count: 1});
@@ -81,11 +81,10 @@ export default (state = {
         case CHANGE_COUNT: {
             let products = [...state.products];
             let foundIndex = products.findIndex(p => p.id === action.productId);
-            if (foundIndex >= 0){
+            if (foundIndex >= 0) {
                 products[foundIndex].count += action.count;
             }
-            if(products[foundIndex].count === 0)
-            {
+            if (products[foundIndex].count === 0) {
                 products = products.filter(p => p.id !== action.productId)
             }
 
@@ -97,7 +96,7 @@ export default (state = {
         case REMOVE_PRODUCT: {
             return {
                 ...state,
-                products: state.products.filter(p=>p.id !== action.productId)
+                products: state.products.filter(p => p.id !== action.productId)
             };
         }
         default:

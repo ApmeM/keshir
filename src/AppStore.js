@@ -6,7 +6,7 @@ import newsReducer from "./components/News/NewsReducer";
 import shoppingCartReducer from "./components/ShoppingCart/ShoppingCartReducer";
 
 let reducers = combineReducers({
-    shop: shopReducer,        
+    shop: shopReducer,
     product: productReducer,
     news: newsReducer,
     shoppingCart: shoppingCartReducer,

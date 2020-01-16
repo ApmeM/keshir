@@ -8,21 +8,21 @@ class ShopHeader extends React.Component {
         if (this.props.isFetching) {
             return <Spinner/>
         }
-        if (this.props.failed){
+        if (this.props.failed) {
             return <Error message="something goes wrong"/>
         }
 
         return <div className={styles.shopHeader}>
             <ul className={styles.shopTypeList}>
-              { this.props.types.map( t => {
-                      return <li key={t}>
-                          <button
-                            onClick={() => this.props.fetchProducts(t)}
-                            className={'' + (this.props.currentType === t ? styles.active : '')}
+                {this.props.types.map(t => {
+                        return <li key={t}>
+                            <button
+                                onClick={() => this.props.fetchProducts(t)}
+                                className={'' + (this.props.currentType === t ? styles.active : '')}
                             >{t}</button>
-                      </li>
-                  }
-              )}
+                        </li>
+                    }
+                )}
             </ul>
         </div>
     }

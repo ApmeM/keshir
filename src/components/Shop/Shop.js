@@ -1,6 +1,6 @@
 import React from "react";
-import {connect} from "react-redux";                          
-import {fetchTypes, fetchProducts} from "./ShopReducer";
+import {connect} from "react-redux";
+import {fetchProducts, fetchTypes} from "./ShopReducer";
 import styles from './Shop.module.css'
 import ShopHeader from "./ShopHeader/ShopHeader";
 import ShopContent from "./ShopContent/ShopContent";
@@ -22,15 +22,13 @@ class Shop extends React.Component {
     }
 
     componentDidMount() {
-        if(this.state.needReload)
-        {
+        if (this.state.needReload) {
             this.props.fetchTypes(this.state.categoryName, this.props.types.currentType);
         }
     }
 
     componentDidUpdate() {
-        if(this.state.needReload)
-        {
+        if (this.state.needReload) {
             this.props.fetchTypes(this.state.categoryName, this.props.types.currentType);
         }
     }
@@ -39,15 +37,17 @@ class Shop extends React.Component {
         if (this.props.isFetching) {
             return <Spinner/>
         }
-        if (this.props.failed){
+        if (this.props.failed) {
             return <Error message="something goes wrong"/>
         }
 
         return <div className={styles.shop}>
-            <ShopHeader {...this.props.types} fetchProducts={(type)=>this.props.fetchProducts(this.state.categoryName, type)}/>
+            <ShopHeader {...this.props.types}
+                        fetchProducts={(type) => this.props.fetchProducts(this.state.categoryName, type)}/>
             <ShopContent {...this.props.products}/>
         </div>
     }
 }
-const mapStateToProps = state => state.shop
+
+const mapStateToProps = state => state.shop;
 export default connect(mapStateToProps, {fetchTypes, fetchProducts})(withRouter(Shop))

@@ -1,5 +1,6 @@
 import * as axios from "axios";
 import csv from "csv-parser";
+
 var Readable = require('stream').Readable;
 
 const instanse = axios.create({
@@ -7,49 +8,49 @@ const instanse = axios.create({
 });
 
 const cache = instanse.get('/spreadsheets/d/e/2PACX-1vTR3vyNCfIEo8rJm_5QeRCYFjppQlCMFdJ5zMCHp-LU-OdoS669zmZJhio_iXGSHKPKQVuE7mg6ALfb/pub?gid=0&single=true&output=csv')
-            .then(response => {
-                return new Promise((resolve, reject) =>{
-                    let currentCategory = '';
-                    const results = [];
-                    const s = new Readable();
-                    s._read = () => {}; // redundant? see update below
-                    s.push(response.data);
-                    s.push(null);
-                    s.pipe(csv())
-                     .on('data', (data) => {
-                            if(data.id === ""){
-                                currentCategory = data.name;
-                                return;
-                            }
+    .then(response => {
+        return new Promise((resolve, reject) => {
+            let currentCategory = '';
+            const results = [];
+            const s = new Readable();
+            s._read = () => {
+            }; // redundant? see update below
+            s.push(response.data);
+            s.push(null);
+            s.pipe(csv())
+                .on('data', (data) => {
+                    if (data.id === "") {
+                        currentCategory = data.name;
+                        return;
+                    }
 
-                            let products = results.filter((r) => r.name === data.name);
-                            if (products.length === 0)
-                            {
-                                let product = {...data, category: currentCategory, variants: [data]};
-                                results.push(product);
-                            }else{
-                                products[0].variants.push(data);
-                            }
-                     })
-                     .on('end', () => {
-                         resolve(results);
-                     });
+                    let products = results.filter((r) => r.name === data.name);
+                    if (products.length === 0) {
+                        let product = {...data, category: currentCategory, variants: [data]};
+                        results.push(product);
+                    } else {
+                        products[0].variants.push(data);
+                    }
+                })
+                .on('end', () => {
+                    resolve(results);
                 });
-            });
+        });
+    });
 
-const getShoppingCart = ()=>{
-    let productsString = localStorage.getItem('shoppingCart')
-    if(productsString === null){
+const getShoppingCart = () => {
+    let productsString = localStorage.getItem('shoppingCart');
+    if (productsString === null) {
         return [];
     }
     return JSON.parse(productsString);
-}
+};
 
 export const postAPI = {
     getProduct(id) {
         return cache.then(products => products.filter(p => p.id === id)[0]);
     },
-    
+
     getTypes(categoryName) {
         return cache.then(
             products => {
@@ -82,7 +83,7 @@ export const postAPI = {
         let products = getShoppingCart();
 
         let foundIndex = products.findIndex(p => p.id === product.id);
-        if(foundIndex >= 0){
+        if (foundIndex >= 0) {
             products[foundIndex].count++;
         } else {
             products.push({...product, count: 1});
@@ -93,11 +94,10 @@ export const postAPI = {
     changeCountShoppingCart(productId, count) {
         let products = getShoppingCart();
         let foundIndex = products.findIndex(p => p.id === productId);
-        if (foundIndex >= 0){
+        if (foundIndex >= 0) {
             products[foundIndex].count += count;
         }
-        if(products[foundIndex].count === 0)
-        {
+        if (products[foundIndex].count === 0) {
             products = products.filter(p => p.id !== productId)
         }
         localStorage.setItem('shoppingCart', JSON.stringify(products));

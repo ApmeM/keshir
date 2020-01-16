@@ -10,14 +10,14 @@
     font-size: 0;
 }
 
-.wrapper  ul>li {
+.wrapper ul > li {
     font-size: 14px;
     font-family: 'Roboto Condensed', sans-serif;
     display: inline-block;
     margin-right: 10px;
 }
 
-.wrapper ul>li>a {
+.wrapper ul > li > a {
     display: block;
     transition: color ease .2s;
     text-decoration: none;
@@ -26,17 +26,20 @@
     font-weight: 500;
     padding: 0 10px;
 }
-.wrapper ul>li>a:hover {
+
+.wrapper ul > li > a:hover {
     color: #f5bb00
 }
 
-.wrapper  ul>li>a.active {
+.wrapper ul > li > a.active {
     background-color: #f5bb00;
     color: #fff;
 }
+
 .navCart {
     position: relative;
 }
+
 .navCart span {
     margin-right: 5px;
 }

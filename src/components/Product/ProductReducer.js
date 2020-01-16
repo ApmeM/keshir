@@ -18,7 +18,7 @@ export const fetchProduct = (productId) => function (dispatch) {
         .catch(error => {
             dispatch(fetchProductFailed())
         });
-}
+};
 
 export const switchVariant = (variantId) => ({type: SWITCH_PRODUCT_VARIANT, variantId});
 
@@ -33,7 +33,7 @@ export default (state = {
             return {
                 ...state,
                 isFetching: true
-            }
+            };
         case FETCH_PRODUCT_SUCCESS:
             return {
                 ...state,

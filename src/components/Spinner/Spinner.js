@@ -9,4 +9,5 @@ class Spinner extends React.Component {
         </div>
     }
 }
+
 export default Spinner

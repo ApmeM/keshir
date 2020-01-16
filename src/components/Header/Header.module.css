@@ -6,13 +6,16 @@
     z-index: 20;
     margin: 10px 0;
 }
+
 .header > div {
     margin-right: 30px;
     float: left;
 }
+
 .header > div:last-child {
     margin-right: 0;
 }
+
 .header a {
     text-decoration: none;
     line-height: 60px;

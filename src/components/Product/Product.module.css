@@ -9,31 +9,38 @@
     font-size: 14px;
     margin-bottom: 10px;
 }
+
 .productCharacteristics {
     margin-bottom: 10px;
 
 }
+
 .productWrap {
     margin-bottom: 30px;
 }
+
 .productWrap::after {
     content: "";
     display: table;
     clear: both;
 }
+
 .productImageCarousel {
 }
+
 .productImage {
     width: 40%;
     height: auto;
     margin-right: 5%;
     float: left;
 }
+
 .productImage img {
     width: 100%;
     height: auto;
     display: block;
 }
+
 .productDesc {
     float: left;
     width: 55%;
@@ -42,10 +49,12 @@
 .productPrice {
     margin-bottom: 50px;
 }
+
 .productPrice div {
     font-weight: 800;
     display: inline;
 }
+
 .addCart {
     font-size: 24px;
     border: none;
@@ -53,26 +62,29 @@
     position: relative;
     top: 3px;
 }
+
 .addCart:hover,
 .addCart:focus {
     color: #ffa500;
     outline: none;
 }
 
-.variant img{
+.variant img {
     width: 30px;
     height: 30px;
 }
+
 .variant {
     display: inline-block;
     margin-right: 10px;
     border: 1px solid transparent;
     background: none;
-    outline: none!important;
+    outline: none !important;
     padding: 0;
     overflow: hidden;
     border-radius: 50%;
- }
+}
+
 .variant:hover {
     border: 1px solid #f5bb00;
 }

@@ -9,14 +9,14 @@ class ShopContent extends React.Component {
         if (this.props.isFetching) {
             return <Spinner/>
         }
-        if (this.props.failed){
+        if (this.props.failed) {
             return <Error message="something goes wrong"/>
         }
 
         return <div className={styles.shopHeader}>
-          { this.props.products.map( p =>
-              <ProductCard key={p.id} {...this.props} productCard={p} />
-          )}
+            {this.props.products.map(p =>
+                <ProductCard key={p.id} {...this.props} productCard={p}/>
+            )}
         </div>
     }
 }
