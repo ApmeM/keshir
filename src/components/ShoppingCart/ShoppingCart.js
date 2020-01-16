@@ -36,26 +36,28 @@ class ShoppingCart extends React.Component {
                 </tr>
             </thead>
             <tbody>
-                {this.props.products.map((p)=> <tr key={p.id}>
-                    <td className={styles.table_td}>
+
+                {this.props.products.map((p)=> {
+                    return <tr key={p.id}>
+                        <td className={styles.table_td}>
                             <NavLink to={`/product/${p.id}`}>
                                 <img className={styles.productThumbnail} src={p.thumbnail} alt='thumbnail'/>
-                                <div className={styles.productName}>{p.type} {p.name}</div>
+                                <div className={styles.productName}>{p.type} {p.name} {p.variant}</div>
                             </NavLink>
                             <div className={styles.productPrice}><div>{p.price}</div> {p.currency}</div>
                             <div dangerouslySetInnerHTML={{__html: p.description}} className={styles.productDescription}></div>
-
-                    </td>
-                    <td>
-                        <button onClick={()=>this.props.decreaseCount(p.id)} title="Убавить"><FontAwesomeIcon icon={faMinus} /></button>
-                        {p.count}
-                        <button onClick={()=>this.props.increaseCount(p.id)} title="Добавить"><FontAwesomeIcon icon={faPlus} /></button></td>
-                    <td className={styles.cartPrice}>
-                        <span>{p.count * p.price}</span> {p.currency}<button onClick={()=>this.props.removeProduct(p.id)} title="Удалить" className={styles.cartDelete}>
-                        <FontAwesomeIcon icon={faTrashAlt} />
+                        </td>
+                        <td>
+                            <button onClick={()=>this.props.decreaseCount(p.id, p.id)} title="Убавить"><FontAwesomeIcon icon={faMinus} /></button>
+                            {p.count}
+                            <button onClick={()=>this.props.increaseCount(p.id, p.id)} title="Добавить"><FontAwesomeIcon icon={faPlus} /></button></td>
+                        <td className={styles.cartPrice}>
+                            <span>{p.count * p.price}</span> {p.currency}<button onClick={()=>this.props.removeProduct(p.id, p.id)} title="Удалить" className={styles.cartDelete}>
+                            <FontAwesomeIcon icon={faTrashAlt} />
                         </button>
-                    </td>
-                </tr>)}
+                        </td>
+                    </tr>
+                })}
                 <tr><td colSpan="3" className={styles.cartPriceTotal}>
                     Общая сумма : <span>{productsTotal}</span> руб.
                 </td></tr>

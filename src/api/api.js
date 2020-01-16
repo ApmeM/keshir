@@ -22,7 +22,14 @@ const cache = instanse.get('/spreadsheets/d/e/2PACX-1vTR3vyNCfIEo8rJm_5QeRCYFjpp
                                 return;
                             }
 
-                            results.push({...data, category: currentCategory})
+                            let products = results.filter((r) => r.name === data.name);
+                            if (products.length === 0)
+                            {
+                                let product = {...data, category: currentCategory, variants: [data]};
+                                results.push(product);
+                            }else{
+                                products[0].variants.push(data);
+                            }
                      })
                      .on('end', () => {
                          resolve(results);

@@ -58,3 +58,11 @@
     color: #ffa500;
     outline: none;
 }
+
+.variant img{
+    width: 30px;
+    height: 30px;
+}
+.variant{
+    display: inline-block;
+ }
