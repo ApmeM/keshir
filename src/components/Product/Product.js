@@ -44,10 +44,10 @@ class Product extends React.Component {
                 <div dangerouslySetInnerHTML={{__html: variant.characteristics}} className={styles.productCharacteristics}/>
             </div>
             <div className={styles.variants}>
+                <p>Варианты:</p>
                 {this.props.product.variants.map((v)=>
-                    <div key={v.id} className={styles.variant}>
-                        <button onClick={()=>this.props.switchVariant(v.id)}><img src={v.thumbnail} alt="variant"/></button>
-                    </div>)}
+                        <button key={v.id} className={styles.variant} onClick={()=>this.props.switchVariant(v.id)}><img src={v.thumbnail} alt="variant"/></button>
+                    )}
             </div>
         </div>;
     }

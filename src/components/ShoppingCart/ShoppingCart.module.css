@@ -5,10 +5,10 @@
     text-align: center;
     width: 100%;
 }
-.cartTable tr:first-child {
+.cartTable thead tr:first-child {
     border-bottom: 1px solid #bbbbbb;
 }
-.cartTable tr:last-child {
+.cartTable tbody tr:last-child {
     border-top: 1px solid #bbbbbb;
 }
 .cartTable td {
@@ -40,7 +40,6 @@
 .cartTable .table_td {
     width: 100%;
     text-align: left;
-    padding: 5px 10px;
     margin-bottom: 25px;
 }
 .cartTable .table_td img {

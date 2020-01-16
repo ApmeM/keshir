@@ -63,6 +63,16 @@
     width: 30px;
     height: 30px;
 }
-.variant{
+.variant {
     display: inline-block;
+    margin-right: 10px;
+    border: 1px solid transparent;
+    background: none;
+    outline: none!important;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 50%;
  }
+.variant:hover {
+    border: 1px solid #f5bb00;
+}
