@@ -5,6 +5,7 @@ import styles from './News.module.css'
 import ProductCard from "../ProductCard/ProductCard";
 import Spinner from "../Spinner/Spinner";
 import Error from "../Error/Error";
+import {compose} from "redux";
 
 class News extends React.Component {
     componentDidMount() {
@@ -28,4 +29,6 @@ class News extends React.Component {
 }
 
 const mapStateToProps = state => state.news;
-export default connect(mapStateToProps, {fetchNews})(News)
+export default compose(
+    connect(mapStateToProps, {fetchNews})
+)(News)

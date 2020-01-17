@@ -7,6 +7,7 @@ import Error from "../Error/Error";
 import {NavLink} from "react-router-dom";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faMinus, faPlus, faTrashAlt} from '@fortawesome/free-solid-svg-icons'
+import {compose} from "redux";
 
 class ShoppingCart extends React.Component {
     componentDidMount() {
@@ -81,4 +82,6 @@ class ShoppingCart extends React.Component {
 }
 
 const mapStateToProps = state => state.shoppingCart;
-export default connect(mapStateToProps, {increaseCount, decreaseCount, removeProduct, fetchShoppingCart})(ShoppingCart)
+export default compose(
+    connect(mapStateToProps, {increaseCount, decreaseCount, removeProduct, fetchShoppingCart})
+)(ShoppingCart)

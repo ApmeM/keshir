@@ -8,6 +8,7 @@ import Error from "../Error/Error";
 import {withRouter} from "react-router-dom";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCartPlus} from '@fortawesome/free-solid-svg-icons'
+import {compose} from "redux";
 
 class Product extends React.Component {
     componentDidMount() {
@@ -60,4 +61,7 @@ class Product extends React.Component {
 }
 
 const mapStateToProps = state => state.product;
-export default connect(mapStateToProps, {fetchProduct, addProduct, switchVariant})(withRouter(Product))
+export default compose(
+    connect(mapStateToProps, {fetchProduct, addProduct, switchVariant}),
+    withRouter
+)(Product)

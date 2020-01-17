@@ -7,6 +7,7 @@ import ShopContent from "./ShopContent/ShopContent";
 import Spinner from "../Spinner/Spinner";
 import Error from "../Error/Error";
 import {withRouter} from "react-router-dom";
+import {compose} from "redux";
 
 class Shop extends React.Component {
     state = {
@@ -50,4 +51,7 @@ class Shop extends React.Component {
 }
 
 const mapStateToProps = state => state.shop;
-export default connect(mapStateToProps, {fetchTypes, fetchProducts})(withRouter(Shop))
+export default compose(
+    connect(mapStateToProps, {fetchTypes, fetchProducts}),
+    withRouter
+)(Shop)

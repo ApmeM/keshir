@@ -5,6 +5,7 @@ import {NavLink} from "react-router-dom";
 import {fetchShoppingCart} from "../ShoppingCart/ShoppingCartReducer";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faShoppingCart} from '@fortawesome/free-solid-svg-icons'
+import {compose} from "redux";
 
 class Nav extends React.Component {
     componentDidMount() {
@@ -36,4 +37,6 @@ class Nav extends React.Component {
 }
 
 const mapStateToProps = state => state.shoppingCart;
-export default connect(mapStateToProps, {fetchShoppingCart})(Nav)
+export default compose(
+    connect(mapStateToProps, {fetchShoppingCart})
+)(Nav)
