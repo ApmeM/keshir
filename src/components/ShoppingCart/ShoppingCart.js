@@ -91,7 +91,8 @@ class ShoppingCart extends React.Component {
                     <td colSpan="3" className={styles.cartPriceTotal}>
                         <span>Contact information: </span>
                         <input onChange={(e) => this.props.contactChanged(e.target.value)} value={this.props.contact}/>
-                        <button disabled={this.props.purchaseProcessing}
+                        {this.props.purchaseProcessing ? <Spinner/> : null}
+                        <button disabled={this.props.purchaseProcessing || !this.props.contact}
                                 onClick={() => this.props.purchase(this.props.contact, this.props.products)}>Purchase
                         </button>
                     </td>
