@@ -1,6 +1,13 @@
 import React from "react";
 import {connect} from "react-redux";
-import {decreaseCount, fetchShoppingCart, increaseCount, removeProduct} from "./ShoppingCartReducer";
+import {
+    contactChanged,
+    decreaseCount,
+    fetchShoppingCart,
+    increaseCount,
+    purchase,
+    removeProduct,
+} from "./ShoppingCartReducer";
 import styles from './ShoppingCart.module.css'
 import Spinner from "../Spinner/Spinner";
 import Error from "../Error/Error";
@@ -20,10 +27,15 @@ class ShoppingCart extends React.Component {
         }
 
         if (this.props.failed) {
-            return <Error message="something goes wrong"/>
+            return <Error message="Что-то пошло не так. Пожалуйста перезагрузите страницу и попробуйте ее раз."/>
         }
 
         if (this.props.products.length === 0) {
+            if (this.props.showPopup){
+                return <div>Спасибо, что разместили заказ<br/>Мы скоро свяжемся с вами.<br/>
+                    <NavLink to={'/'}>Вернуться к магазину.</NavLink>
+                </div>
+            }
             return <Error message="Ваша корзина пуста."/>
         }
 
@@ -75,6 +87,15 @@ class ShoppingCart extends React.Component {
                         Общая сумма : <span>{productsTotal}</span> руб.
                     </td>
                 </tr>
+                <tr>
+                    <td colSpan="3" className={styles.cartPriceTotal}>
+                        <span>Contact information: </span>
+                        <input onChange={(e) => this.props.contactChanged(e.target.value)} value={this.props.contact}/>
+                        <button disabled={this.props.purchaseProcessing}
+                                onClick={() => this.props.purchase(this.props.contact, this.props.products)}>Purchase
+                        </button>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -83,5 +104,12 @@ class ShoppingCart extends React.Component {
 
 const mapStateToProps = state => state.shoppingCart;
 export default compose(
-    connect(mapStateToProps, {increaseCount, decreaseCount, removeProduct, fetchShoppingCart})
+    connect(mapStateToProps, {
+        increaseCount,
+        decreaseCount,
+        removeProduct,
+        fetchShoppingCart,
+        purchase,
+        contactChanged
+    })
 )(ShoppingCart)

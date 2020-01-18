@@ -8,6 +8,12 @@ const FETCH_SHOPPINGCART_SUCCESS = 'FETCH_SHOPPINGCART_SUCCESS';
 const FETCH_SHOPPINGCART_REQUEST = 'FETCH_SHOPPINGCART_REQUEST';
 const FETCH_SHOPPINGCART_FAILED = 'FETCH_SHOPPINGCART_FAILED';
 
+const PURCHASE_SUCCESS = 'PURCHASE_SUCCESS';
+const PURCHASE_REQUEST = 'PURCHASE_REQUEST';
+const PURCHASE_FAILED =  'PURCHASE_FAILED';
+
+const CONTACT_CHANGED = 'CONTACT_CHANGED';
+
 export const addProduct = (product) => function (dispatch) {
     dispatch({type: ADD_PRODUCT, product});
     postAPI.addProductShoppingCart(product);
@@ -40,10 +46,32 @@ export const fetchShoppingCart = () => function (dispatch) {
         });
 };
 
+export const contactChanged = (contact) => ({type: CONTACT_CHANGED, contact});
+
+export const purchaseRequest = () => ({type: PURCHASE_REQUEST});
+export const purchaseSuccess = () => ({type: PURCHASE_SUCCESS});
+export const purchaseFailed = () => ({type: PURCHASE_FAILED});
+
+export const purchase = (contact, products) => function(dispatch) {
+    let productIds = products.map((p) => `\n${p.id} ${p.name} ${p.variant} x ${p.count}`);
+    dispatch(purchaseRequest());
+    postAPI.placeOrder(contact, productIds)
+        .then(() => {
+            postAPI.cleanShoppingCart();
+            dispatch(purchaseSuccess());
+        })
+        .catch(() => {
+            dispatch(purchaseFailed())
+        });
+};
+
 export default (state = {
     isFetching: false,
     failed: false,
-    products: []
+    products: [],
+    contact: '',
+    purchaseProcessing: false,
+    showPopup: false
 }, action) => {
     switch (action.type) {
         case FETCH_SHOPPINGCART_REQUEST:
@@ -98,6 +126,33 @@ export default (state = {
                 ...state,
                 products: state.products.filter(p => p.id !== action.productId)
             };
+        }
+        case CONTACT_CHANGED: {
+            return {
+                ...state,
+                contact: action.contact
+            };
+        }
+        case PURCHASE_REQUEST: {
+            return{
+                ...state,
+                purchaseProcessing: true
+            }
+        }
+        case PURCHASE_SUCCESS: {
+            return{
+                ...state,
+                purchaseProcessing: false,
+                showPopup: true,
+                products:[]
+            }
+        }
+        case PURCHASE_FAILED: {
+            return{
+                ...state,
+                purchaseProcessing: false,
+                failed: true
+            }
         }
         default:
             return state

@@ -78,7 +78,9 @@ export const postAPI = {
             resolve(getShoppingCart());
         });
     },
-
+    cleanShoppingCart(){
+        localStorage.setItem('shoppingCart', JSON.stringify([]));
+    },
     addProductShoppingCart(product) {
         let products = getShoppingCart();
 
@@ -108,4 +110,18 @@ export const postAPI = {
         products = products.filter(p => p.id !== productId);
         localStorage.setItem('shoppingCart', JSON.stringify(products));
     },
+    placeOrder(contact, products) {
+        const contactsGoogleFormId = '87338845';
+        const productsGoogleFormId = '865352840';
+
+        const formData = new FormData();
+        formData.append(`entry.${contactsGoogleFormId}`, contact);
+        formData.append(`entry.${productsGoogleFormId}`, products);
+        return axios({
+            url: 'https://cors-anywhere.herokuapp.com/https://docs.google.com/forms/d/e/1FAIpQLSd-vdFgZ2cwy4VlPo2lmHDS7z8-hV6Ia9fyIwUQXVHJfR-qhg/formResponse' ,
+            method: 'post',
+            data: formData,
+            responseType: 'json'
+        });
+    }
 };
