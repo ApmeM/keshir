@@ -17,11 +17,21 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm install, build, and test
-      run: |
-        npm ci
-        npm run build --if-present
-        npm test
+    - name: npm install
+      run: npm ci
+      env:
+        CI: true
+    - name: npm build
+      run: npm run build --if-present
+      env:
+        CI: true
+        REACT_APP_LOGO: ${{ secrets.REACT_APP_LOGO }}
+        REACT_APP_FORM_CONTACT_ID: ${{ secrets.REACT_APP_FORM_CONTACT_ID }}
+        REACT_APP_FORM_PRODUCTS_ID: ${{ secrets.REACT_APP_FORM_PRODUCTS_ID }}
+        REACT_APP_FORM_ID: ${{ secrets.REACT_APP_FORM_ID }}
+        REACT_APP_SPREADSHEET_ID: ${{ secrets.REACT_APP_SPREADSHEET_ID }}
+    - name: npm test
+      run: npm test
       env:
         CI: true
     - name: Deploy to Firebase

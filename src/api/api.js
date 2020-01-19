@@ -7,7 +7,7 @@ const instanse = axios.create({
     baseURL: 'https://docs.google.com/'
 });
 
-const cache = instanse.get('/spreadsheets/d/e/2PACX-1vTR3vyNCfIEo8rJm_5QeRCYFjppQlCMFdJ5zMCHp-LU-OdoS669zmZJhio_iXGSHKPKQVuE7mg6ALfb/pub?gid=0&single=true&output=csv')
+const cache = instanse.get(`/spreadsheets/d/e/${process.env.REACT_APP_SPREADSHEET_ID}/pub?gid=0&single=true&output=csv`)
     .then(response => {
         return new Promise((resolve, reject) => {
             let currentCategory = '';
@@ -110,15 +110,14 @@ export const postAPI = {
         products = products.filter(p => p.id !== productId);
         localStorage.setItem('shoppingCart', JSON.stringify(products));
     },
-    placeOrder(contact, products) {
-        const contactsGoogleFormId = '87338845';
-        const productsGoogleFormId = '865352840';
 
+    placeOrder(contact, products) {
+        const corsUrl='https://cors-anywhere.herokuapp.com/';
         const formData = new FormData();
-        formData.append(`entry.${contactsGoogleFormId}`, contact);
-        formData.append(`entry.${productsGoogleFormId}`, products);
+        formData.append(`entry.${process.env.REACT_APP_FORM_CONTACT_ID}`, contact);
+        formData.append(`entry.${process.env.REACT_APP_FORM_PRODUCTS_ID}`, products);
         return axios({
-            url: 'https://cors-anywhere.herokuapp.com/https://docs.google.com/forms/d/e/1FAIpQLSd-vdFgZ2cwy4VlPo2lmHDS7z8-hV6Ia9fyIwUQXVHJfR-qhg/formResponse' ,
+            url: `${corsUrl}https://docs.google.com/forms/d/e/${process.env.REACT_APP_FORM_ID}/formResponse`,
             method: 'post',
             data: formData,
             responseType: 'json'
