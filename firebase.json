@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "target": "keshirka",
     "public": "build",
     "ignore": [
       "firebase.json",
