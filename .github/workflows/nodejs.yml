@@ -35,6 +35,7 @@ jobs:
       env:
         CI: true
     - name: Deploy to Firebase
+      if: github.ref == 'refs/heads/master'
       uses: w9jds/firebase-action@master
       with:
         args: deploy
