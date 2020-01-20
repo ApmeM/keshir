@@ -76,15 +76,17 @@
 
 .variant {
     display: inline-block;
-    margin-right: 10px;
+    margin-left: 10px;
     border: 1px solid transparent;
     background: none;
     outline: none !important;
     padding: 0;
     overflow: hidden;
     border-radius: 50%;
+    position: relative;
+    top: -2px;
 }
-
+.variant.active,
 .variant:hover {
     border: 1px solid #f5bb00;
 }

@@ -39,11 +39,10 @@
 }
 
 .cartPrice {
-
+text-align: right;
 }
 
 .cartPriceTotal {
-    border-top: 1px solid #000000;
     margin: 20px 0 30px;
     text-align: right !important;
 }
@@ -102,4 +101,22 @@
     display: block;
     height: auto;
     width: 100%;
+}
+.cartTable .buttonPurchase {
+    background: #f5bb00;
+    color: #ffffff!important;
+    border: 1px solid #ffffff;
+    font-size: 24px;
+    padding: 3px 15px 7px;
+}
+.cartTable .buttonPurchase:hover {
+    border-color: #f5bb00;
+}
+.cartTable .buttonPurchase:disabled {
+    background: #6c757d;
+    color: #ffffff!important;
+    border-color: #ffffff;
+}
+.cartTable tfoot td{
+    text-align: right!important;
 }

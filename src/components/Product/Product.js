@@ -38,11 +38,12 @@ class Product extends React.Component {
                 <img src={variant.thumbnail} alt='product'/>
             </div>
             <div className={styles.productDesc}>
-                <div className={styles.productName}>{variant.name} {variant.variant}</div>
+                <div className={styles.productName}>{variant.name} <br/>{variant.variant}</div>
                 <div className={styles.productPrice}>
+
                     <button onClick={() => this.props.addProduct(variant)} className={styles.addCart}><FontAwesomeIcon
-                        icon={faCartPlus}/></button>
-                    <div>{variant.price}</div>
+                        icon={faCartPlus} title="Добавить в корзину" /></button>
+                    <div>{variant.price} </div>
                     {variant.currency}</div>
 
                 <div dangerouslySetInnerHTML={{__html: variant.description}} className={styles.productDescription}/>
@@ -50,10 +51,10 @@ class Product extends React.Component {
                      className={styles.productCharacteristics}/>
             </div>
             <div className={styles.variants}>
-                <p>Варианты:</p>
+                Варианты:
                 {this.props.product.variants.map((v) =>
                     <button key={v.id} className={styles.variant} onClick={() => this.props.switchVariant(v.id)}><img
-                        src={v.thumbnail} alt="variant"/></button>
+                        src={v.thumbnail} alt="variant" title={v.variant}/></button>
                 )}
             </div>
         </div>;

@@ -48,7 +48,8 @@ class ShoppingCart extends React.Component {
                 <tr>
                     <td>Продукт</td>
                     <td>Количество</td>
-                    <td>Стоимость</td>
+                    <td></td>
+                    <td className={styles.cartPrice}>Стоимость</td>
                 </tr>
                 </thead>
                 <tbody>
@@ -73,31 +74,39 @@ class ShoppingCart extends React.Component {
                             <button onClick={() => this.props.increaseCount(p.id, p.id)} title="Добавить">
                                 <FontAwesomeIcon icon={faPlus}/></button>
                         </td>
+                        <td>   <button onClick={() => this.props.removeProduct(p.id, p.id)} title="Удалить"
+                                       className={styles.cartDelete}>
+                            <FontAwesomeIcon icon={faTrashAlt}/>
+                        </button>
+                        </td>
                         <td className={styles.cartPrice}>
                             <span>{p.count * p.price}</span> {p.currency}
-                            <button onClick={() => this.props.removeProduct(p.id, p.id)} title="Удалить"
-                                    className={styles.cartDelete}>
-                                <FontAwesomeIcon icon={faTrashAlt}/>
-                            </button>
                         </td>
                     </tr>
                 })}
                 <tr>
-                    <td colSpan="3" className={styles.cartPriceTotal}>
+                    <td colSpan="4" className={styles.cartPriceTotal}>
                         Общая сумма : <span>{productsTotal}</span> руб.
                     </td>
                 </tr>
+                </tbody>
+                <tfoot>
                 <tr>
-                    <td colSpan="3" className={styles.cartPriceTotal}>
-                        <span>Contact information: </span>
+                    <td colSpan="4" >
+                        <div><p><span>Контактная информация(e-mail или номер телефона): </span>
                         <input onChange={(e) => this.props.contactChanged(e.target.value)} value={this.props.contact}/>
                         {this.props.purchaseProcessing ? <Spinner/> : null}
-                        <button disabled={this.props.purchaseProcessing || !this.props.contact}
-                                onClick={() => this.props.purchase(this.props.contact, this.props.products)}>Purchase
-                        </button>
+                        <br/><i>Поле Контактная информация обязательно для заполнения</i></p>
+                        </div>
+                        <div>
+                            <button disabled={this.props.purchaseProcessing || !this.props.contact}
+                                onClick={() => this.props.purchase(this.props.contact, this.props.products)}
+                                className={styles.buttonPurchase}>Оформить
+                            </button>
+                        </div>
                     </td>
                 </tr>
-                </tbody>
+                </tfoot>
             </table>
         </div>
     }
