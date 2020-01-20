@@ -1,4 +1,4 @@
-import {postAPI} from "../../api/api";
+import {shopAPI} from "../../api/shopAPI";
 
 const FETCH_NEWS_REQUEST = 'FETCH_NEWS_REQUEST';
 const FETCH_NEWS_SUCCESS = 'FETCH_NEWS_SUCCESS';
@@ -10,7 +10,7 @@ export const fetchNewsFailed = () => ({type: FETCH_NEWS_FAILED});
 
 export const fetchNews = (productIds) => function (dispatch) {
     dispatch(fetchNewsRequest());
-    postAPI.getNews(productIds)
+    shopAPI.getNews(productIds)
         .then(products => {
             dispatch(fetchNewsSuccess(products))
         })

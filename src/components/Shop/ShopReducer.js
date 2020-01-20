@@ -1,4 +1,4 @@
-import {postAPI} from "../../api/api";
+import {shopAPI} from "../../api/shopAPI";
 
 const FETCH_TYPES_REQUEST = 'FETCH_TYPES_REQUEST';
 const FETCH_TYPES_SUCCESS = 'FETCH_TYPES_SUCCESS';
@@ -18,7 +18,7 @@ export const fetchProductsFailed = () => ({type: FETCH_PRODUCTS_FAILED});
 
 export const fetchTypes = (categoryName, defaultType) => function (dispatch) {
     dispatch(fetchTypesRequest());
-    postAPI.getTypes(categoryName)
+    shopAPI.getTypes(categoryName)
         .then(types => {
             dispatch(fetchTypesSuccess(types));
             let type = types[0];
@@ -34,7 +34,7 @@ export const fetchTypes = (categoryName, defaultType) => function (dispatch) {
 
 export const fetchProducts = (categoryName, typeName) => function (dispatch) {
     dispatch(fetchProductsRequest(typeName));
-    postAPI.getProducts(categoryName, typeName)
+    shopAPI.getProducts(categoryName, typeName)
         .then(products => {
             dispatch(fetchProductsSuccess(products))
         })

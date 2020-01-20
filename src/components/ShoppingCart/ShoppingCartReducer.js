@@ -1,4 +1,4 @@
-import {postAPI} from "../../api/api";
+import {shoppingCartAPI} from "../../api/shoppingCartAPI";
 
 const ADD_PRODUCT = 'ADD_PRODUCT';
 const CHANGE_COUNT = 'CHANGE_COUNT';
@@ -14,19 +14,19 @@ const PURCHASE_FAILED =  'PURCHASE_FAILED';
 
 export const addProduct = (product) => function (dispatch) {
     dispatch({type: ADD_PRODUCT, product});
-    postAPI.addProductShoppingCart(product);
+    shoppingCartAPI.addProductShoppingCart(product);
 };
 export const increaseCount = (productId) => function (dispatch) {
     dispatch({type: CHANGE_COUNT, productId, count: 1});
-    postAPI.changeCountShoppingCart(productId, 1);
+    shoppingCartAPI.changeCountShoppingCart(productId, 1);
 };
 export const decreaseCount = (productId) => function (dispatch) {
     dispatch({type: CHANGE_COUNT, productId, count: -1});
-    postAPI.changeCountShoppingCart(productId, -1);
+    shoppingCartAPI.changeCountShoppingCart(productId, -1);
 };
 export const removeProduct = (productId) => function (dispatch) {
     dispatch({type: REMOVE_PRODUCT, productId});
-    postAPI.removeProductShoppingCart(productId, 1);
+    shoppingCartAPI.removeProductShoppingCart(productId, 1);
 };
 
 export const fetchShoppingCartRequest = () => ({type: FETCH_SHOPPINGCART_REQUEST});
@@ -35,7 +35,7 @@ export const fetchShoppingCartFailed = () => ({type: FETCH_SHOPPINGCART_FAILED})
 
 export const fetchShoppingCart = () => function (dispatch) {
     dispatch(fetchShoppingCartRequest());
-    postAPI.getShoppingCart()
+    shoppingCartAPI.getShoppingCart()
         .then(products => {
             dispatch(fetchShoppingCartSuccess(products))
         })
@@ -51,9 +51,9 @@ export const purchaseFailed = () => ({type: PURCHASE_FAILED});
 export const purchase = (contact, products) => function(dispatch) {
     let productIds = products.map((p) => `\nId=${p.id} Name=${p.name} variant=${p.variant} count=${p.count} price=${p.price}`);
     dispatch(purchaseRequest());
-    return postAPI.placeOrder(contact, productIds)
+    return shoppingCartAPI.placeOrder(contact, productIds)
         .then(() => {
-            postAPI.cleanShoppingCart();
+            shoppingCartAPI.cleanShoppingCart();
             dispatch(purchaseSuccess());
         })
         .catch(() => {
