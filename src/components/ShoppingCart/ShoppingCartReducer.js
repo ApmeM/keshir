@@ -12,8 +12,6 @@ const PURCHASE_SUCCESS = 'PURCHASE_SUCCESS';
 const PURCHASE_REQUEST = 'PURCHASE_REQUEST';
 const PURCHASE_FAILED =  'PURCHASE_FAILED';
 
-const CONTACT_CHANGED = 'CONTACT_CHANGED';
-
 export const addProduct = (product) => function (dispatch) {
     dispatch({type: ADD_PRODUCT, product});
     postAPI.addProductShoppingCart(product);
@@ -46,8 +44,6 @@ export const fetchShoppingCart = () => function (dispatch) {
         });
 };
 
-export const contactChanged = (contact) => ({type: CONTACT_CHANGED, contact});
-
 export const purchaseRequest = () => ({type: PURCHASE_REQUEST});
 export const purchaseSuccess = () => ({type: PURCHASE_SUCCESS});
 export const purchaseFailed = () => ({type: PURCHASE_FAILED});
@@ -55,7 +51,7 @@ export const purchaseFailed = () => ({type: PURCHASE_FAILED});
 export const purchase = (contact, products) => function(dispatch) {
     let productIds = products.map((p) => `\nId=${p.id} Name=${p.name} variant=${p.variant} count=${p.count} price=${p.price}`);
     dispatch(purchaseRequest());
-    postAPI.placeOrder(contact, productIds)
+    return postAPI.placeOrder(contact, productIds)
         .then(() => {
             postAPI.cleanShoppingCart();
             dispatch(purchaseSuccess());
@@ -69,7 +65,6 @@ export default (state = {
     isFetching: false,
     failed: false,
     products: [],
-    contact: '',
     purchaseProcessing: false,
     showPopup: false
 }, action) => {
@@ -125,12 +120,6 @@ export default (state = {
             return {
                 ...state,
                 products: state.products.filter(p => p.id !== action.productId)
-            };
-        }
-        case CONTACT_CHANGED: {
-            return {
-                ...state,
-                contact: action.contact
             };
         }
         case PURCHASE_REQUEST: {

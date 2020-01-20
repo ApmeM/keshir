@@ -24,17 +24,17 @@
     text-align: left;
 }
 
-.cartTable button {
+.controlButton {
     border: none;
     background: none;
     outline: none !important;
 }
 
-.cartTable button:hover {
+.controlButton:hover {
     color: #f5bb00;
 }
 
-.cartTable .cartDelete:hover {
+.cartDelete:hover {
     color: #ff0000;
 }
 
@@ -101,21 +101,6 @@ text-align: right;
     display: block;
     height: auto;
     width: 100%;
-}
-.cartTable .buttonPurchase {
-    background: #f5bb00;
-    color: #ffffff!important;
-    border: 1px solid #ffffff;
-    font-size: 24px;
-    padding: 3px 15px 7px;
-}
-.cartTable .buttonPurchase:hover {
-    border-color: #f5bb00;
-}
-.cartTable .buttonPurchase:disabled {
-    background: #6c757d;
-    color: #ffffff!important;
-    border-color: #ffffff;
 }
 .cartTable tfoot td{
     text-align: right!important;

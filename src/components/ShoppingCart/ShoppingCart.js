@@ -1,7 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
 import {
-    contactChanged,
     decreaseCount,
     fetchShoppingCart,
     increaseCount,
@@ -15,6 +14,7 @@ import {NavLink} from "react-router-dom";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faMinus, faPlus, faTrashAlt} from '@fortawesome/free-solid-svg-icons'
 import {compose} from "redux";
+import PlaceOrderForm from "./PlaceOrderForm/PlaceOrderForm";
 
 class ShoppingCart extends React.Component {
     componentDidMount() {
@@ -68,14 +68,14 @@ class ShoppingCart extends React.Component {
                                  className={styles.productDescription}></div>
                         </td>
                         <td>
-                            <button onClick={() => this.props.decreaseCount(p.id, p.id)} title="Убавить">
+                            <button onClick={() => this.props.decreaseCount(p.id, p.id)} title="Убавить" className={styles.controlButton}>
                                 <FontAwesomeIcon icon={faMinus}/></button>
                             {p.count}
-                            <button onClick={() => this.props.increaseCount(p.id, p.id)} title="Добавить">
+                            <button onClick={() => this.props.increaseCount(p.id, p.id)} title="Добавить" className={styles.controlButton}>
                                 <FontAwesomeIcon icon={faPlus}/></button>
                         </td>
                         <td>   <button onClick={() => this.props.removeProduct(p.id, p.id)} title="Удалить"
-                                       className={styles.cartDelete}>
+                                       className={`${styles.cartDelete} ${styles.controlButton}`}>
                             <FontAwesomeIcon icon={faTrashAlt}/>
                         </button>
                         </td>
@@ -93,17 +93,7 @@ class ShoppingCart extends React.Component {
                 <tfoot>
                 <tr>
                     <td colSpan="4" >
-                        <div><p><span>Контактная информация(e-mail или номер телефона): </span>
-                        <input onChange={(e) => this.props.contactChanged(e.target.value)} value={this.props.contact}/>
-                        {this.props.purchaseProcessing ? <Spinner/> : null}
-                        <br/><i>Поле Контактная информация обязательно для заполнения</i></p>
-                        </div>
-                        <div>
-                            <button disabled={this.props.purchaseProcessing || !this.props.contact}
-                                onClick={() => this.props.purchase(this.props.contact, this.props.products)}
-                                className={styles.buttonPurchase}>Оформить
-                            </button>
-                        </div>
+                        <PlaceOrderForm onSubmit={(form) => this.props.purchase(form.contact, this.props.products)}/>
                     </td>
                 </tr>
                 </tfoot>
@@ -119,7 +109,6 @@ export default compose(
         decreaseCount,
         removeProduct,
         fetchShoppingCart,
-        purchase,
-        contactChanged
+        purchase
     })
 )(ShoppingCart)

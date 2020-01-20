@@ -1,5 +1,6 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunkMiddleware from "redux-thunk";
+import { reducer as formReducer } from 'redux-form'
 import shopReducer from "./components/Shop/ShopReducer";
 import productReducer from "./components/Product/ProductReducer";
 import newsReducer from "./components/News/NewsReducer";
@@ -10,6 +11,7 @@ let reducers = combineReducers({
     product: productReducer,
     news: newsReducer,
     shoppingCart: shoppingCartReducer,
+    form: formReducer
 });
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));
