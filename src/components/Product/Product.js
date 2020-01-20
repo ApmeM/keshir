@@ -43,7 +43,7 @@ class Product extends React.Component {
                 <div className={styles.variants}>
                     Варианты:
                     {this.props.product.variants.map((v) =>
-                        <button key={v.id} className={styles.variant} onClick={() => this.props.switchVariant(v.id)}><img
+                        <button key={v.id} className={`${styles.variant} ${v.id === this.props.variantId ? styles.active: ''}`} onClick={() => this.props.switchVariant(v.id)}><img
                             src={v.thumbnail} alt="variant" title={v.variant}/></button>
                     )}
                 </div>

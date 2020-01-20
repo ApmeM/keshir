@@ -53,7 +53,7 @@ export const purchaseSuccess = () => ({type: PURCHASE_SUCCESS});
 export const purchaseFailed = () => ({type: PURCHASE_FAILED});
 
 export const purchase = (contact, products) => function(dispatch) {
-    let productIds = products.map((p) => `\n${p.id} ${p.name} ${p.variant} x ${p.count}`);
+    let productIds = products.map((p) => `\nId=${p.id} Name=${p.name} variant=${p.variant} count=${p.count} price=${p.price}`);
     dispatch(purchaseRequest());
     postAPI.placeOrder(contact, productIds)
         .then(() => {
