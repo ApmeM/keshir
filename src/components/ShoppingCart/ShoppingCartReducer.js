@@ -10,9 +10,15 @@ const FETCH_SHOPPINGCART_FAILED = 'FETCH_SHOPPINGCART_FAILED';
 
 const PURCHASE_SUCCESS = 'PURCHASE_SUCCESS';
 const PURCHASE_REQUEST = 'PURCHASE_REQUEST';
-const PURCHASE_FAILED =  'PURCHASE_FAILED';
+const PURCHASE_FAILED = 'PURCHASE_FAILED';
 
-export const addProduct = (product) => function (dispatch) {
+export const addProduct = (product, form) => function (dispatch) {
+    let productId = product.id + Object.keys(form).reduce((a, b) => {
+        return a + b + form[b];
+    }, "");
+
+    product = {...product, rawProductId: product.id, selection: form, id: productId}
+
     dispatch({type: ADD_PRODUCT, product});
     shoppingCartAPI.addProductShoppingCart(product);
 };
@@ -48,8 +54,13 @@ export const purchaseRequest = () => ({type: PURCHASE_REQUEST});
 export const purchaseSuccess = () => ({type: PURCHASE_SUCCESS});
 export const purchaseFailed = () => ({type: PURCHASE_FAILED});
 
-export const purchase = (contact, products) => function(dispatch) {
-    let productIds = products.map((p) => `\nId=${p.id} Name=${p.name} variant=${p.variant} count=${p.count} price=${p.price}`);
+export const purchase = (contact, products) => function (dispatch) {
+    let productIds = products.map(function (p) {
+        let selectionText = Object.keys(p.selection).reduce((a, b) => {
+            return a + b + p.selection[b];
+        }, "");
+        return `\nId=${p.rawProductId} Name=${p.name} variant=${p.variant} selection=${selectionText} count=${p.count} price=${p.price}`;
+    });
     dispatch(purchaseRequest());
     return shoppingCartAPI.placeOrder(contact, productIds)
         .then(() => {
@@ -123,21 +134,21 @@ export default (state = {
             };
         }
         case PURCHASE_REQUEST: {
-            return{
+            return {
                 ...state,
                 purchaseProcessing: true
             }
         }
         case PURCHASE_SUCCESS: {
-            return{
+            return {
                 ...state,
                 purchaseProcessing: false,
                 showPopup: true,
-                products:[]
+                products: []
             }
         }
         case PURCHASE_FAILED: {
-            return{
+            return {
                 ...state,
                 purchaseProcessing: false,
                 failed: true

@@ -6,9 +6,8 @@ import styles from './Product.module.css'
 import Spinner from "../Spinner/Spinner";
 import Error from "../Error/Error";
 import {withRouter} from "react-router-dom";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faCartPlus} from '@fortawesome/free-solid-svg-icons'
 import {compose} from "redux";
+import SelectionForm from "./SelectionForm/SelectionForm";
 
 class Product extends React.Component {
     componentDidMount() {
@@ -35,7 +34,7 @@ class Product extends React.Component {
 
         return <div className={styles.productWrap}>
             <div className={styles.productImage}>
-                <img src={variant.thumbnail} alt='product'/>
+                <img src={variant.images} alt='product'/>
             </div>
             <div className={styles.productDesc}>
                 <div className={styles.productName}>{variant.name} <br/>{variant.variant}</div>
@@ -43,16 +42,13 @@ class Product extends React.Component {
                 <div className={styles.variants}>
                     Варианты:
                     {this.props.product.variants.map((v) =>
-                        <button key={v.id} className={`${styles.variant} ${v.id === this.props.variantId ? styles.active: ''}`} onClick={() => this.props.switchVariant(v.id)}><img
-                            src={v.thumbnail} alt="variant" title={v.variant}/></button>
+                        <button key={v.id} className={`${styles.variant} ${v.id === variant.id ? styles.active: ''}`} onClick={() => this.props.switchVariant(v.id)}><img
+                            src={v.images} alt="variant" title={v.variant}/></button>
                     )}
                 </div>
-                <div className={styles.productPrice}>
-
-                    <button onClick={() => this.props.addProduct(variant)} className={styles.addCart}><FontAwesomeIcon
-                        icon={faCartPlus} title="Добавить в корзину" /></button>
-                    <div>{variant.price} </div>
-                    {variant.currency}</div>
+                <div>
+                    <SelectionForm selections={variant.selection} variant={variant} onSubmit={(form)=>this.props.addProduct(variant, form)}/>
+                </div>
 
                 <div dangerouslySetInnerHTML={{__html: variant.description}} className={styles.productDescription}/>
                 <div dangerouslySetInnerHTML={{__html: variant.characteristics}}

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './PlaceOrder.module.css'
+import styles from './PlaceOrderForm.module.css'
 import {compose} from "redux";
 import {Field, reduxForm} from "redux-form";
 

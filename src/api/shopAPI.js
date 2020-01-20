@@ -6,8 +6,7 @@ const corsUrl = 'https://cors-anywhere.herokuapp.com/';
 
 const cache = axios({
         url: `${corsUrl}https://docs.google.com/spreadsheets/d/e/${process.env.REACT_APP_SPREADSHEET_ID}/pub?gid=${process.env.REACT_APP_SPREADSHEET_PAGE_ID}&single=true&output=csv`,
-        method: 'get',
-        responseType: 'csv'
+        method: 'get'
     })
     .then(response => {
         return new Promise((resolve, reject) => {
@@ -23,6 +22,18 @@ const cache = axios({
                     if (data.id === "") {
                         currentCategory = data.name;
                         return;
+                    }
+
+                    if (data.selection) {
+                        data.selectionRaw = data.selection;
+                        data.selection = data.selection.split(';').map((s) => {
+                            const selector = s.split(':');
+                            const selectorName = selector[0];
+                            const selectorList = selector[1].split(',');
+                            return {selectorName, selectorList};
+                        });
+                    }else{
+                        data.selection = [];
                     }
 
                     let products = results.filter((r) => r.name === data.name);
