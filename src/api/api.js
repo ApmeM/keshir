@@ -7,7 +7,7 @@ const instanse = axios.create({
     baseURL: 'https://docs.google.com/'
 });
 
-const cache = instanse.get(`/spreadsheets/d/e/${process.env.REACT_APP_SPREADSHEET_ID}/pub?gid=0&single=true&output=csv`)
+const cache = instanse.get(`/spreadsheets/d/e/${process.env.REACT_APP_SPREADSHEET_ID}/pub?gid=${process.env.REACT_APP_SPREADSHEET_PAGE_ID}&single=true&output=csv`)
     .then(response => {
         return new Promise((resolve, reject) => {
             let currentCategory = '';
