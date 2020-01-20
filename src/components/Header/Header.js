@@ -8,8 +8,8 @@ class Header extends React.Component {
     render() {
         return <header className={styles.header}>
             <Logo/>
-            <Nav/>
             <Social/>
+            <Nav/>
         </header>
     }
 }

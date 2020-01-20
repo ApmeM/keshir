@@ -2,16 +2,25 @@
     background-color: #fff;
     display: block;
     position: relative;
-    height: 80px;
-    z-index: 20;
-    margin: 10px 0;
+    margin: 10px 0 20px;
+}
+.header::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+@media only screen and (max-width: 860px) {
+    .header {
+        margin: 0 0 15px;
+    }
 }
 
-.header > div {
-    margin-right: 30px;
-    float: left;
+@media only screen and (min-width: 861px) {
+    .header > div {
+        margin-right: 30px;
+        float: left;
+    }
 }
-
 .header > div:last-child {
     margin-right: 0;
 }
@@ -19,4 +28,9 @@
 .header a {
     text-decoration: none;
     line-height: 60px;
+}
+@media only screen and (max-width: 860px) {
+    .header a {
+        line-height: 30px;
+    }
 }

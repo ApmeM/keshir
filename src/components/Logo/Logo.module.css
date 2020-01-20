@@ -8,3 +8,8 @@
     text-transform: uppercase;
 }
 
+@media only screen and (max-width: 860px) {
+    .logo {
+        float: left;
+    }
+}

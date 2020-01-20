@@ -4,7 +4,10 @@
     padding: 10px 0;
     font-family: 'Roboto', Arial, sans-serif;
     text-transform: uppercase;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+}
+
+@media only screen and (max-width: 860px) {
+    .footer {
+        padding: 5px 0;
+    }
 }

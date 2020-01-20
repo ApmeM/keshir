@@ -1,10 +1,17 @@
 .wrapper {
     width: 800px;
     margin: 0 auto;
-    padding-bottom: 70px;
     position: relative;
+}
+@media only screen and (max-width: 860px) {
+    .wrapper {
+        width: 100%;
+        min-width: 320px;
+        padding: 0 20px;
+    }
 }
 
 .content {
+    clear: both;
     margin-bottom: 50px;
 }

@@ -2,6 +2,11 @@
     float: left;
     text-align: left;
 }
+@media only screen and (max-width: 860px) {
+    .wrapper {
+        clear: both;
+    }
+}
 
 .wrapper ul {
     padding: 0;
@@ -26,6 +31,11 @@
     font-weight: 500;
     padding: 0 10px;
 }
+@media only screen and (max-width: 860px) {
+    .wrapper ul > li > a {
+        padding: 2px 10px;
+    }
+}
 
 .wrapper ul > li > a:hover {
     color: #f5bb00
@@ -38,6 +48,8 @@
 
 .navCart {
     position: relative;
+    top: 1px;
+    padding: 0 10px 0 8px!important;
 }
 
 .navCart span {

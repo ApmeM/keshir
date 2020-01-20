@@ -3,6 +3,11 @@
     line-height: 1.1;
     margin-bottom: 10px;
 }
+@media only screen and (max-width: 860px) {
+    .productName {
+        font-size: 20px;
+    }
+}
 
 .productDescription {
     font-style: italic;
@@ -34,6 +39,11 @@
     margin-right: 5%;
     float: left;
 }
+@media only screen and (max-width: 860px) {
+    .productImage {
+       display: none;
+    }
+}
 
 .productImage img {
     width: 100%;
@@ -41,13 +51,20 @@
     display: block;
 }
 
-.productDesc {
-    float: left;
-    width: 55%;
+@media only screen and (min-width: 861px) {
+    .productDesc {
+        float: left;
+        width: 55%;
+    }
 }
 
 .productPrice {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
+}
+@media only screen and (max-width: 860px) {
+    .productPrice{
+        margin-bottom: 10px;
+    }
 }
 
 .productPrice div {
@@ -72,6 +89,16 @@
 .variant img {
     width: 30px;
     height: 30px;
+}
+.variant {
+    margin-bottom: 5px;
+}
+@media only screen and (max-width: 860px) {
+
+    .variant img {
+        width: 60px;
+        height: 60px;
+    }
 }
 
 .variant {
