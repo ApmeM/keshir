@@ -89,7 +89,12 @@ class ShoppingCart extends React.Component {
                 })}
                 <tr>
                     <td colSpan="4" className={styles.cartPriceTotal}>
-                        Общая сумма : <span>{productsTotal}</span> руб.
+                        Доставка почтой : <span>300</span> руб.
+                    </td>
+                </tr>
+                <tr>
+                    <td colSpan="4" className={styles.cartPriceTotal}>
+                        Общая сумма : <span>{productsTotal + 300}</span> руб.
                     </td>
                 </tr>
                 </tbody>
