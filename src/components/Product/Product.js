@@ -50,7 +50,7 @@ class Product extends React.Component {
                     <SelectionForm selections={variant.selection} variant={variant} onSubmit={(form)=>this.props.addProduct(variant, form)}/>
                 </div>
 
-                <div dangerouslySetInnerHTML={{__html: variant.description}} className={styles.productDescription}/>
+                <p><i dangerouslySetInnerHTML={{__html: variant.description}} className={styles.productDescription}/></p>
                 <div dangerouslySetInnerHTML={{__html: variant.characteristics}}
                      className={styles.productCharacteristics}/>
             </div>

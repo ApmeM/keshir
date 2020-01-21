@@ -28,7 +28,7 @@ class SelectionForm extends React.Component {
                 <button className={styles.addCart}><FontAwesomeIcon
                     icon={faCartPlus} title="Добавить в корзину"
                     disabled={this.props.invalid || this.props.submitting || this.props.pristine}/></button>
-                <div>{this.props.variant.price} </div>
+                <div>{this.props.variant.price}&nbsp;</div>
                 {this.props.variant.currency}
             </div>
         </form>;

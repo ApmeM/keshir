@@ -65,7 +65,7 @@ class ShoppingCart extends React.Component {
                                 }, "")}</div>
                             </NavLink>
                             <div className={styles.productPrice}>
-                                <div>{p.price}</div>
+                                <div>{p.price}&nbsp;</div>
                                 {p.currency}</div>
                             <div dangerouslySetInnerHTML={{__html: p.description}}
                                  className={styles.productDescription}></div>

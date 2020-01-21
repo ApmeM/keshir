@@ -24,7 +24,7 @@ class Nav extends React.Component {
                 <li>
                     <NavLink activeClassName={styles.active} to="/shop/Blockers">Блокаторы</NavLink>
                 </li>
-                <li>
+                <li className={styles.liNavAbout}>
                     <NavLink activeClassName={styles.active} to="/about">Оплата и доставка</NavLink>
                 </li>
                 <li>

@@ -1,4 +1,11 @@
 .social {
     float: right !important;
     font-size: 24px;
+    line-height: 1.5;
+}
+
+@media only screen and (max-width: 860px) {
+    header .social {
+        display: none;
+    }
 }

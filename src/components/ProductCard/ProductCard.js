@@ -16,7 +16,7 @@ class ProductCard extends React.Component {
                 <div className={styles.productName}>{this.props.productCard.type} {this.props.productCard.name}</div>
             </NavLink>
             <div className={styles.productPrice}>
-                <div>{this.props.productCard.price} </div>
+                <div>{this.props.productCard.price}&nbsp;</div>
                 {this.props.productCard.currency}</div>
             <div dangerouslySetInnerHTML={{__html: this.props.productCard.description}}
                  className={styles.productDescription}></div>
