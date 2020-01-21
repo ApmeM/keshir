@@ -4,10 +4,8 @@ import {Readable} from "stream";
 
 const corsUrl = 'https://cors-anywhere.herokuapp.com/';
 
-const cache = axios({
-        url: `${corsUrl}https://docs.google.com/spreadsheets/d/e/${process.env.REACT_APP_SPREADSHEET_ID}/pub?gid=${process.env.REACT_APP_SPREADSHEET_PAGE_ID}&single=true&output=csv`,
-        method: 'get'
-    })
+const cache = axios.create()
+    .get(`${corsUrl}https://docs.google.com/spreadsheets/d/e/${process.env.REACT_APP_SPREADSHEET_ID}/pub?gid=${process.env.REACT_APP_SPREADSHEET_PAGE_ID}&single=true&output=csv`)
     .then(response => {
         return new Promise((resolve, reject) => {
             let currentCategory = '';

@@ -56,11 +56,7 @@ export const shoppingCartAPI = {
         const formData = new FormData();
         formData.append(`entry.${process.env.REACT_APP_FORM_CONTACT_ID}`, contact);
         formData.append(`entry.${process.env.REACT_APP_FORM_PRODUCTS_ID}`, products);
-        return axios({
-            url: `${corsUrl}https://docs.google.com/forms/d/e/${process.env.REACT_APP_FORM_ID}/formResponse`,
-            method: 'post',
-            data: formData,
-            responseType: 'json'
-        });
+        return axios.create()
+            .post(`${corsUrl}https://docs.google.com/forms/d/e/${process.env.REACT_APP_FORM_ID}/formResponse`, formData);
     }
 };
