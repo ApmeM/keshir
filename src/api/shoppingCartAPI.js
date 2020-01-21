@@ -1,5 +1,7 @@
 import * as axios from "axios";
 
+const corsUrl='https://cors-anywhere.herokuapp.com/';
+
 const getShoppingCart = () => {
     let productsString = localStorage.getItem('shoppingCart');
     if (productsString === null) {
@@ -51,7 +53,6 @@ export const shoppingCartAPI = {
     },
 
     placeOrder(contact, products) {
-        const corsUrl='https://cors-anywhere.herokuapp.com/';
         const formData = new FormData();
         formData.append(`entry.${process.env.REACT_APP_FORM_CONTACT_ID}`, contact);
         formData.append(`entry.${process.env.REACT_APP_FORM_PRODUCTS_ID}`, products);

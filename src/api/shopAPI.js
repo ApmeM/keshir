@@ -1,13 +1,14 @@
 import * as axios from "axios";
 import csv from "csv-parser";
+import {Readable} from "stream";
 
-var Readable = require('stream').Readable;
+const corsUrl = 'https://cors-anywhere.herokuapp.com/';
 
-const instanse = axios.create({
-    baseURL: 'https://docs.google.com/'
-});
-
-const cache = instanse.get(`/spreadsheets/d/e/${process.env.REACT_APP_SPREADSHEET_ID}/pub?gid=${process.env.REACT_APP_SPREADSHEET_PAGE_ID}&single=true&output=csv`)
+const cache = axios({
+        url: `${corsUrl}https://docs.google.com/spreadsheets/d/e/${process.env.REACT_APP_SPREADSHEET_ID}/pub?gid=${process.env.REACT_APP_SPREADSHEET_PAGE_ID}&single=true&output=csv`,
+        method: 'get',
+        responseType: 'csv'
+    })
     .then(response => {
         return new Promise((resolve, reject) => {
             let currentCategory = '';
