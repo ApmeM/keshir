@@ -31,3 +31,7 @@
     outline: none;
     border-color: #ffa500;
 }
+.selectorName {
+    display: inline-block;
+    width: 59px;
+}

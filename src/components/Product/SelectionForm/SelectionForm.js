@@ -12,7 +12,7 @@ class SelectionForm extends React.Component {
         return <form onSubmit={this.props.handleSubmit}>
             {this.props.selections.map((s) => {
                 return <p key={s.selectorName}>
-                    <span>{s.selectorName}</span>
+                    <span className={styles.selectorName}>{s.selectorName}</span>
                     <Field component={'select'} name={s.selectorName} placeholder={`Выберите ${s.selectorName}`}
                            validate={[required]}>
                         <option value={undefined}>Выберите</option>
