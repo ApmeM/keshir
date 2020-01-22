@@ -8,22 +8,26 @@
     }
 }
 
-.productPrice div {
+.productPriceValue {
     font-weight: 800;
     display: inline;
 }
 
 
 .addCart {
-    font-size: 24px;
-    border: none;
-    background: none;
+    background: #ffa500;
+    color: #ffffff;
+    margin: 0 5px;
+    padding: 2px 10px;
     position: relative;
-    top: 3px;
+    top: 0px;
+    outline: none;
+    border: 1px solid #ffffff;
 }
 
 .addCart:hover,
 .addCart:focus {
-    color: #ffa500;
+    color: #ffffff;
     outline: none;
+    border-color: #ffa500;
 }

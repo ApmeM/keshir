@@ -2,3 +2,7 @@
 input {
     padding: 2px 5px;
 }
+select {
+    border-color: #f5bb00;
+    margin: 0 10px;
+}

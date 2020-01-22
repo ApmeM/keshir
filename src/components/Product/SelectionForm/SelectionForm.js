@@ -3,7 +3,7 @@ import styles from './SelectionForm.module.css'
 import {compose} from "redux";
 import {Field, reduxForm} from "redux-form";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCartPlus} from "@fortawesome/free-solid-svg-icons";
+import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
 
 const required = value => (value || typeof value === 'number' ? undefined : 'Required')
 
@@ -12,7 +12,7 @@ class SelectionForm extends React.Component {
     render() {
         return <form onSubmit={this.props.handleSubmit}>
             {this.props.selections.map((s) => {
-                return <div key={s.selectorName}>
+                return <p key={s.selectorName}>
                     <span>{s.selectorName}</span>
                     <Field component={'select'} name={s.selectorName} placeholder={`Выберите ${s.selectorName}`}
                            validate={[required]}>
@@ -21,16 +21,17 @@ class SelectionForm extends React.Component {
                             return <option key={i}>{i}</option>;
                         })}
                     </Field>
-                </div>
+                </p>
             })}
 
-            <div className={styles.productPrice}>
+            <p className={styles.productPrice}>
+                <span className={styles.productPriceValue}>{this.props.variant.price}&nbsp;</span>
+                    {this.props.variant.currency}
                 <button className={styles.addCart}><FontAwesomeIcon
-                    icon={faCartPlus} title="Добавить в корзину"
-                    disabled={this.props.invalid || this.props.submitting || this.props.pristine}/></button>
-                <div>{this.props.variant.price}&nbsp;</div>
-                {this.props.variant.currency}
-            </div>
+                    icon={faArrowRight} title="Добавить в корзину"
+                    disabled={this.props.invalid || this.props.submitting || this.props.pristine}/>&nbsp;Добавить в корзину</button>
+            </p>
+
         </form>;
     }
 }
