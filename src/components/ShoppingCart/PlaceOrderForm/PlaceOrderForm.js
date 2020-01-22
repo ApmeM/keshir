@@ -2,8 +2,8 @@ import React from "react";
 import styles from './PlaceOrderForm.module.css'
 import {compose} from "redux";
 import {Field, reduxForm} from "redux-form";
+import {required} from "../../../utils/validators";
 
-const required = value => (value || typeof value === 'number' ? undefined : 'Required')
 
 class PlaceOrderForm extends React.Component {
 

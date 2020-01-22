@@ -4,8 +4,7 @@ import {compose} from "redux";
 import {Field, reduxForm} from "redux-form";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
-
-const required = value => (value || typeof value === 'number' ? undefined : 'Required')
+import {required} from "../../../utils/validators";
 
 class SelectionForm extends React.Component {
 
