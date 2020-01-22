@@ -9,7 +9,7 @@ import {compose} from "redux";
 
 class News extends React.Component {
     componentDidMount() {
-        this.props.fetchNews(["1", "4", "10"]);
+        this.props.fetchNews(["13", "19", "20"]);
     }
 
     render() {
@@ -21,9 +21,9 @@ class News extends React.Component {
         }
         return <div className={styles.news}>
             <h4>Интернет-магазин пряжи</h4>
-            <ProductCard {...this.props} productCard={this.props.products.filter(p => p.id === "1")[0]}/>
-            <ProductCard {...this.props} productCard={this.props.products.filter(p => p.id === "4")[0]}/>
-            <ProductCard {...this.props} productCard={this.props.products.filter(p => p.id === "10")[0]}/>
+            <ProductCard {...this.props} productCard={this.props.products.filter(p => p.id === "13")[0]}/>
+            <ProductCard {...this.props} productCard={this.props.products.filter(p => p.id === "19")[0]}/>
+            <ProductCard {...this.props} productCard={this.props.products.filter(p => p.id === "20")[0]}/>
         </div>
     }
 }
