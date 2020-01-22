@@ -39,8 +39,6 @@ class ShoppingCart extends React.Component {
             return <Error message="Ваша корзина пуста."/>
         }
 
-        // ToDo: move calculations to somewhere else
-        let productsTotal = this.props.products.reduce((acc, value) => acc + value.count * value.price, 0);
 
         return <div className={styles.news}>
             <table className={styles.cartTable}>
@@ -94,7 +92,7 @@ class ShoppingCart extends React.Component {
                 </tr>
                 <tr>
                     <td colSpan="4" className={styles.cartPriceTotal}>
-                        Общая сумма : <span>{productsTotal + 300}</span> руб.
+                        Общая сумма : <span>{this.props.productsTotal + 300}</span> руб.
                     </td>
                 </tr>
                 </tbody>
@@ -110,7 +108,12 @@ class ShoppingCart extends React.Component {
     }
 }
 
-const mapStateToProps = state => state.shoppingCart;
+const mapStateToProps = state => {
+  return {
+      ...state.shoppingCart,
+      productsTotal: state.shoppingCart.products.reduce((acc, value) => acc + value.count * value.price, 0)
+  }
+} ;
 export default compose(
     connect(mapStateToProps, {
         increaseCount,
