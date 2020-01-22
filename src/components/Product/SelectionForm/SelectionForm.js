@@ -15,9 +15,9 @@ class SelectionForm extends React.Component {
                     <span>{s.selectorName}</span>
                     <Field component={'select'} name={s.selectorName} placeholder={`Выберите ${s.selectorName}`}
                            validate={[required]}>
-                        <option>Выберите</option>
+                        <option value={undefined}>Выберите</option>
                         {s.selectorList.map((i) => {
-                            return <option key={i}>{i}</option>;
+                            return <option value={i} key={i}>{i}</option>;
                         })}
                     </Field>
                 </p>
