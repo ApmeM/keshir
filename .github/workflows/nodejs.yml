@@ -30,6 +30,7 @@ jobs:
         REACT_APP_FORM_PRODUCTS_ID: ${{ secrets.REACT_APP_FORM_PRODUCTS_ID }}
         REACT_APP_FORM_ID: ${{ secrets.REACT_APP_FORM_ID }}
         REACT_APP_SPREADSHEET_ID: ${{ secrets.REACT_APP_SPREADSHEET_ID }}
+        REACT_APP_SPREADSHEET_PAGE_ID: ${{ secrets.REACT_APP_SPREADSHEET_PAGE_ID }}
     - name: npm test
       run: npm test
       env:
