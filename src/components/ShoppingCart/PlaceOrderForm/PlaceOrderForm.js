@@ -14,7 +14,7 @@ class PlaceOrderForm extends React.Component {
                 <br/><i>Поле Контактная информация обязательно для заполнения</i></p>
             </div>
             <div>
-                <button className={styles.buttonPurchase} disabled={this.props.invalid || this.props.submitting || this.props.pristine}>Оформить</button>
+                <button className={styles.buttonPurchase} disabled={this.props.invalid || this.props.submitting}>Оформить</button>
             </div>
         </form>;
     }

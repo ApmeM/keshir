@@ -55,13 +55,13 @@ class ShoppingCart extends React.Component {
                 {this.props.products.map((p) => {
                     return <tr key={p.id}>
                         <td className={styles.table_td}>
-                            <NavLink to={`/product/${p.id}`}>
+                            <NavLink to={`/product/${p.rawProductId}`}>
                                 <img className={styles.productThumbnail} src={p.images} alt='thumbnail'/>
                                 <div className={styles.productName}>{p.type} {p.name} {p.variant} </div>
-                                <div>{ Object.keys(p.selection).map((b) => {
-                                    return <div key={b}>{b} {p.selection[b]}</div>;
-                                }, "")}</div>
                             </NavLink>
+                            <div>{ Object.keys(p.selection).map((b) => {
+                                return <div key={b}>{b} {p.selection[b]}</div>;
+                            }, "")}</div>
                             <div className={styles.productPrice}>
                                 <div>{p.price}&nbsp;</div>
                                 {p.currency}</div>

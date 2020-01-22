@@ -22,7 +22,7 @@
     position: relative;
     top: 0px;
     outline: none;
-    border: 1px solid #ffffff;
+    border: 1px solid transparent;
 }
 
 .addCart:hover,
@@ -30,6 +30,10 @@
     color: #ffffff;
     outline: none;
     border-color: #ffa500;
+}
+.addCart:disabled {
+    background: #6c757d;
+    border-color: transparent!important;
 }
 .selectorName {
     display: inline-block;
