@@ -1,8 +1,8 @@
 import {shopAPI} from "../../api/shopAPI";
 
-const FETCH_NEWS_REQUEST = 'FETCH_NEWS_REQUEST';
-const FETCH_NEWS_SUCCESS = 'FETCH_NEWS_SUCCESS';
-const FETCH_NEWS_FAILED = 'FETCH_NEWS_FAILED';
+const FETCH_NEWS_REQUEST = 'NEWS/FETCH_REQUEST';
+const FETCH_NEWS_SUCCESS = 'NEWS/FETCH_SUCCESS';
+const FETCH_NEWS_FAILED = 'NEWS/FETCH_FAILED';
 
 export const fetchNewsRequest = () => ({type: FETCH_NEWS_REQUEST});
 export const fetchNewsSuccess = (products) => ({type: FETCH_NEWS_SUCCESS, products});
