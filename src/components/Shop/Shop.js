@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import {fetchProducts, fetchTypes} from "./ShopReducer";
 import styles from './Shop.module.css'
@@ -9,46 +9,27 @@ import Error from "../Error/Error";
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
 
-class Shop extends React.Component {
-    state = {
-        categoryName: '',
-        needReload: true
-    };
+const Shop = (props) => {
+    const {categoryName, currentType} = props.match.params;
+    const fetchTypes = props.fetchTypes;
 
-    static getDerivedStateFromProps(props, state) {
-        return {
-            categoryName: props.match.params.categoryName,
-            needReload: props.match.params.categoryName !== state.categoryName
-        };
+    useEffect(() => {
+        fetchTypes(categoryName, currentType);
+    }, [fetchTypes, categoryName, currentType]);
+
+    if (props.isFetching) {
+        return <Spinner/>
+    }
+    if (props.failed) {
+        return <Error message="something goes wrong"/>
     }
 
-    componentDidMount() {
-        if (this.state.needReload) {
-            this.props.fetchTypes(this.state.categoryName, this.props.types.currentType);
-        }
-    }
-
-    componentDidUpdate() {
-        if (this.state.needReload) {
-            this.props.fetchTypes(this.state.categoryName, this.props.types.currentType);
-        }
-    }
-
-    render() {
-        if (this.props.isFetching) {
-            return <Spinner/>
-        }
-        if (this.props.failed) {
-            return <Error message="something goes wrong"/>
-        }
-
-        return <div className={styles.shop}>
-            <ShopHeader {...this.props.types}
-                        fetchProducts={(type) => this.props.fetchProducts(this.state.categoryName, type)}/>
-            <ShopContent {...this.props.products}/>
-        </div>
-    }
-}
+    return <div className={styles.shop}>
+        <ShopHeader {...props.types}
+                    fetchProducts={(type) => props.fetchProducts(props.match.params.categoryName, type)}/>
+        <ShopContent {...props.products}/>
+    </div>
+};
 
 const mapStateToProps = state => state.shop;
 export default compose(

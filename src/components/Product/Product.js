@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import {fetchProduct, switchVariant} from "./ProductReducer";
 import {addProduct} from "../ShoppingCart/ShoppingCartReducer";
@@ -9,53 +9,56 @@ import {withRouter} from "react-router-dom";
 import {compose} from "redux";
 import SelectionForm from "./SelectionForm/SelectionForm";
 
-class Product extends React.Component {
-    componentDidMount() {
-        this.props.fetchProduct(this.props.match.params.productId);
+const Product = (props) => {
+    const fetchProduct = props.fetchProduct;
+    const productId = props.match.params.productId;
+
+    useEffect(() => {
+        fetchProduct(productId);
+    }, [fetchProduct, productId]);
+
+    if (props.isFetching) {
+        return <Spinner/>
+    }
+    if (props.failed) {
+        return <Error message="something goes wrong"/>
     }
 
-    render() {
-        if (this.props.isFetching) {
-            return <Spinner/>
-        }
-        if (this.props.failed) {
-            return <Error message="something goes wrong"/>
-        }
-
-        if (this.props.product === undefined) {
-            return <Error message="No product found."/>
-        }
-
-        let variants = this.props.product.variants.filter((v) => v.id === this.props.variantId);
-        let variant = this.props.product.variants[0];
-        if (variants.length !== 0) {
-            variant = variants[0];
-        }
-
-        return <div className={styles.productWrap}>
-            <div className={styles.productImage}>
-                <img src={variant.images} alt='product'/>
-            </div>
-            <div className={styles.productDesc}>
-                <div className={styles.productName}>{variant.name} <br/>{variant.variant}</div>
-
-                <div className={styles.variants}>
-                    Варианты:
-                    {this.props.product.variants.map((v) =>
-                        <button key={v.id} className={`${styles.variant} ${v.id === variant.id ? styles.active: ''}`} onClick={() => this.props.switchVariant(v.id)}><img
-                            src={v.images} alt="variant" title={v.variant}/></button>
-                    )}
-                </div>
-                <div>
-                    <SelectionForm selections={variant.selection} variant={variant} onSubmit={(form)=>this.props.addProduct(variant, form)}/>
-                </div>
-
-                <p><i dangerouslySetInnerHTML={{__html: variant.description}} className={styles.productDescription}/></p>
-                <div dangerouslySetInnerHTML={{__html: variant.characteristics}}
-                     className={styles.productCharacteristics}/>
-            </div>
-        </div>;
+    if (props.product === undefined) {
+        return <Error message="No product found."/>
     }
+
+    let variants = props.product.variants.filter((v) => v.id === props.variantId);
+    let variant = props.product.variants[0];
+    if (variants.length !== 0) {
+        variant = variants[0];
+    }
+
+    return <div className={styles.productWrap}>
+        <div className={styles.productImage}>
+            <img src={variant.images} alt='product'/>
+        </div>
+        <div className={styles.productDesc}>
+            <div className={styles.productName}>{variant.name} <br/>{variant.variant}</div>
+
+            <div className={styles.variants}>
+                Варианты:
+                {props.product.variants.map((v) =>
+                    <button key={v.id} className={`${styles.variant} ${v.id === variant.id ? styles.active : ''}`}
+                            onClick={() => props.switchVariant(v.id)}><img
+                        src={v.images} alt="variant" title={v.variant}/></button>
+                )}
+            </div>
+            <div>
+                <SelectionForm selections={variant.selection} variant={variant}
+                               onSubmit={(form) => props.addProduct(variant, form)}/>
+            </div>
+
+            <p><i dangerouslySetInnerHTML={{__html: variant.description}} className={styles.productDescription}/></p>
+            <div dangerouslySetInnerHTML={{__html: variant.characteristics}}
+                 className={styles.productCharacteristics}/>
+        </div>
+    </div>;
 }
 
 const mapStateToProps = state => state.product;

@@ -4,14 +4,12 @@ import Nav from "../Nav/Nav";
 import Logo from "../Logo/Logo";
 import Social from "../Social/Social";
 
-class Header extends React.Component {
-    render() {
-        return <header className={styles.header}>
-            <Logo/>
-            <Social/>
-            <Nav/>
-        </header>
-    }
+const Header = (props) => {
+    return <header className={styles.header}>
+        <Logo/>
+        <Social/>
+        <Nav/>
+    </header>
 }
 
 export default Header;

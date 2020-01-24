@@ -13,26 +13,22 @@ import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
 
 import styles from "./App.module.css";
 
-class App extends React.Component {
-    render() {
-        return (
-            <BrowserRouter>
-                <Provider store={store}>
-                    <div className={styles.wrapper}>
-                        <Header/>
-                        <div className={styles.content}>
-                            <Route path="/" exact render={() => <News/>}/>
-                            <Route path="/product/:productId" render={() => <Product/>}/>
-                            <Route path="/shop/:categoryName" render={() => <Shop/>}/>
-                            <Route path="/cart" render={() => <ShoppingCart/>}/>
-                            <Route path="/about" render={() => <About/>}/>
-                        </div>
-                        <Footer/>
-                    </div>
-                </Provider>
-            </BrowserRouter>
-        );
-    }
+const App = (props) => {
+    return <BrowserRouter>
+        <Provider store={store}>
+            <div className={styles.wrapper}>
+                <Header/>
+                <div className={styles.content}>
+                    <Route path="/" exact render={() => <News/>}/>
+                    <Route path="/product/:productId" render={() => <Product/>}/>
+                    <Route path="/shop/:categoryName" render={() => <Shop/>}/>
+                    <Route path="/cart" render={() => <ShoppingCart/>}/>
+                    <Route path="/about" render={() => <About/>}/>
+                </div>
+                <Footer/>
+            </div>
+        </Provider>
+    </BrowserRouter>
 }
 
 export default App;
