@@ -65,6 +65,7 @@ export const purchase = (contact, products) => async function (dispatch) {
     try {
         await shoppingCartAPI.placeOrder(contact, productIds);
         dispatch(purchaseSuccess());
+        shoppingCartAPI.cleanShoppingCart();
     } catch (error) {
         dispatch(purchaseFailed())
     }
