@@ -9,15 +9,14 @@ export const fetchProductRequest = () => ({type: FETCH_PRODUCT_REQUEST});
 export const fetchProductSuccess = (product) => ({type: FETCH_PRODUCT_SUCCESS, product});
 export const fetchProductFailed = () => ({type: FETCH_PRODUCT_FAILED});
 
-export const fetchProduct = (productId) => function (dispatch) {
+export const fetchProduct = (productId) => async function (dispatch) {
     dispatch(fetchProductRequest());
-    shopAPI.getProduct(productId)
-        .then(product => {
-            dispatch(fetchProductSuccess(product))
-        })
-        .catch(error => {
-            dispatch(fetchProductFailed())
-        });
+    try {
+        const product = await shopAPI.getProduct(productId);
+        dispatch(fetchProductSuccess(product))
+    } catch (error) {
+        dispatch(fetchProductFailed())
+    }
 };
 
 export const switchVariant = (variantId) => ({type: SWITCH_PRODUCT_VARIANT, variantId});

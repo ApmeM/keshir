@@ -39,37 +39,35 @@ export const fetchShoppingCartRequest = () => ({type: FETCH_SHOPPINGCART_REQUEST
 export const fetchShoppingCartSuccess = (products) => ({type: FETCH_SHOPPINGCART_SUCCESS, products});
 export const fetchShoppingCartFailed = () => ({type: FETCH_SHOPPINGCART_FAILED});
 
-export const fetchShoppingCart = () => function (dispatch) {
+export const fetchShoppingCart = () => async function (dispatch) {
     dispatch(fetchShoppingCartRequest());
-    shoppingCartAPI.getShoppingCart()
-        .then(products => {
-            dispatch(fetchShoppingCartSuccess(products))
-        })
-        .catch(error => {
-            dispatch(fetchShoppingCartFailed())
-        });
+    try {
+        const products = await shoppingCartAPI.getShoppingCart();
+        dispatch(fetchShoppingCartSuccess(products));
+    } catch (error) {
+        dispatch(fetchShoppingCartFailed())
+    }
 };
 
 export const purchaseRequest = () => ({type: PURCHASE_REQUEST});
 export const purchaseSuccess = () => ({type: PURCHASE_SUCCESS});
 export const purchaseFailed = () => ({type: PURCHASE_FAILED});
 
-export const purchase = (contact, products) => function (dispatch) {
+export const purchase = (contact, products) => async function (dispatch) {
     let productIds = products.map(function (p) {
         let selectionText = Object.keys(p.selection).reduce((a, b) => {
             return a + b + p.selection[b];
         }, "");
         return `\nId=${p.rawProductId} Name=${p.name} variant=${p.variant} selection=${selectionText} count=${p.count} price=${p.price}`;
     });
+
     dispatch(purchaseRequest());
-    return shoppingCartAPI.placeOrder(contact, productIds)
-        .then(() => {
-            shoppingCartAPI.cleanShoppingCart();
-            dispatch(purchaseSuccess());
-        })
-        .catch(() => {
-            dispatch(purchaseFailed())
-        });
+    try {
+        await shoppingCartAPI.placeOrder(contact, productIds);
+        dispatch(purchaseSuccess());
+    } catch (error) {
+        dispatch(purchaseFailed())
+    }
 };
 
 export default (state = {

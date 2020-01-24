@@ -8,15 +8,14 @@ export const fetchNewsRequest = () => ({type: FETCH_NEWS_REQUEST});
 export const fetchNewsSuccess = (products) => ({type: FETCH_NEWS_SUCCESS, products});
 export const fetchNewsFailed = () => ({type: FETCH_NEWS_FAILED});
 
-export const fetchNews = (productIds) => function (dispatch) {
+export const fetchNews = (productIds) => async function (dispatch) {
     dispatch(fetchNewsRequest());
-    shopAPI.getNews(productIds)
-        .then(products => {
-            dispatch(fetchNewsSuccess(products))
-        })
-        .catch(error => {
-            dispatch(fetchNewsFailed())
-        });
+    try {
+        const products = await shopAPI.getNews(productIds)
+        dispatch(fetchNewsSuccess(products))
+    } catch (error) {
+        dispatch(fetchNewsFailed())
+    }
 };
 
 export default (state = {

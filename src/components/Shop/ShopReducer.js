@@ -16,31 +16,29 @@ export const fetchProductsRequest = (typeName) => ({type: FETCH_PRODUCTS_REQUEST
 export const fetchProductsSuccess = (products) => ({type: FETCH_PRODUCTS_SUCCESS, products});
 export const fetchProductsFailed = () => ({type: FETCH_PRODUCTS_FAILED});
 
-export const fetchTypes = (categoryName, defaultType) => function (dispatch) {
+export const fetchTypes = (categoryName, defaultType) => async function (dispatch) {
     dispatch(fetchTypesRequest());
-    shopAPI.getTypes(categoryName)
-        .then(types => {
-            dispatch(fetchTypesSuccess(types));
-            let type = types[0];
-            if (types.includes(defaultType)) {
-                type = defaultType;
-            }
-            fetchProducts(categoryName, type)(dispatch);
-        })
-        .catch(error => {
-            dispatch(fetchTypesFailed())
-        });
+    try {
+        const types = await shopAPI.getTypes(categoryName)
+        dispatch(fetchTypesSuccess(types));
+        let type = types[0];
+        if (types.includes(defaultType)) {
+            type = defaultType;
+        }
+        fetchProducts(categoryName, type)(dispatch);
+    } catch (error) {
+        dispatch(fetchTypesFailed())
+    }
 };
 
-export const fetchProducts = (categoryName, typeName) => function (dispatch) {
+export const fetchProducts = (categoryName, typeName) => async function (dispatch) {
     dispatch(fetchProductsRequest(typeName));
-    shopAPI.getProducts(categoryName, typeName)
-        .then(products => {
-            dispatch(fetchProductsSuccess(products))
-        })
-        .catch(error => {
-            dispatch(fetchProductsFailed())
-        });
+    try {
+        const products = await shopAPI.getProducts(categoryName, typeName)
+        dispatch(fetchProductsSuccess(products))
+    } catch (error) {
+        dispatch(fetchProductsFailed())
+    }
 };
 
 export default (state = {

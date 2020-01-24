@@ -4,74 +4,75 @@ import {Readable} from "stream";
 
 const corsUrl = 'https://cors-anywhere.herokuapp.com/';
 
-const cache = axios.create()
-    .get(`${corsUrl}https://docs.google.com/spreadsheets/d/e/${process.env.REACT_APP_SPREADSHEET_ID}/pub?gid=${process.env.REACT_APP_SPREADSHEET_PAGE_ID}&single=true&output=csv`)
-    .then(response => {
-        return new Promise((resolve, reject) => {
-            let currentCategory = '';
-            const results = [];
-            const s = new Readable();
-            s._read = () => {
-            }; // redundant? see update below
-            s.push(response.data);
-            s.push(null);
-            s.pipe(csv())
-                .on('data', (data) => {
-                    if (data.id === "") {
-                        currentCategory = data.name;
-                        return;
-                    }
+const getCache = async ()=>{
+    const response = await axios.create().get(`${corsUrl}https://docs.google.com/spreadsheets/d/e/${process.env.REACT_APP_SPREADSHEET_ID}/pub?gid=${process.env.REACT_APP_SPREADSHEET_PAGE_ID}&single=true&output=csv`)
+    return new Promise((resolve, reject) => {
+        let currentCategory = '';
+        const results = [];
+        const s = new Readable();
+        s._read = () => {
+        }; // redundant? see update below
+        s.push(response.data);
+        s.push(null);
+        s.pipe(csv())
+            .on('data', (data) => {
+                if (data.id === "") {
+                    currentCategory = data.name;
+                    return;
+                }
 
-                    if (data.selection) {
-                        data.selectionRaw = data.selection;
-                        data.selection = data.selection.split(';').map((s) => {
-                            const selector = s.split(':');
-                            const selectorName = selector[0];
-                            const selectorList = selector[1].split(',');
-                            return {selectorName, selectorList};
-                        });
-                    }else{
-                        data.selection = [];
-                    }
+                if (data.selection) {
+                    data.selectionRaw = data.selection;
+                    data.selection = data.selection.split(';').map((s) => {
+                        const selector = s.split(':');
+                        const selectorName = selector[0];
+                        const selectorList = selector[1].split(',');
+                        return {selectorName, selectorList};
+                    });
+                } else {
+                    data.selection = [];
+                }
 
-                    let products = results.filter((r) => r.name === data.name);
-                    if (products.length === 0) {
-                        let product = {...data, category: currentCategory, variants: [data]};
-                        results.push(product);
-                    } else {
-                        products[0].variants.push(data);
-                    }
-                })
-                .on('end', () => {
-                    resolve(results);
-                });
+                let products = results.filter((r) => r.name === data.name);
+                if (products.length === 0) {
+                    let product = {...data, category: currentCategory, variants: [data]};
+                    results.push(product);
+                } else {
+                    products[0].variants.push(data);
+                }
+            })
+            .on('end', () => {
+                resolve(results);
+            });
         });
-    });
+}
+
+const cache = getCache();
 
 export const shopAPI = {
-    getProduct(id) {
-        return cache.then(products => products.filter(p => p.id === id)[0]);
+    async getProduct(id) {
+        const products = await cache;
+        return products.filter(p => p.id === id)[0];
     },
 
-    getTypes(categoryName) {
-        return cache.then(
-            products => {
-                let result = products
-                    .filter(p => p.category === categoryName)
-                    .map(p => p.type)
-                    .filter(p => p !== "")
-                    .filter((elem, pos, arr) => arr.indexOf(elem) === pos);
-                result.unshift("All");
-                return result;
-            }
-        );
+    async getTypes(categoryName) {
+        const products = await cache;
+        const result = products
+            .filter(p => p.category === categoryName)
+            .map(p => p.type)
+            .filter(p => p !== "")
+            .filter((elem, pos, arr) => arr.indexOf(elem) === pos);
+        result.unshift("All");
+        return result;
     },
 
-    getProducts(categoryName, typeName) {
-        return cache.then(products => products.filter(p => p.category === categoryName && (p.type === typeName || typeName === "All")));
+    async getProducts(categoryName, typeName) {
+        const products = await cache;
+        return products.filter(p => p.category === categoryName && (p.type === typeName || typeName === "All"));
     },
 
-    getNews(productIds) {
-        return cache.then(products => products.filter(p => productIds.includes(p.id)));
+    async getNews(productIds) {
+        const products = await cache;
+        return products.filter(p => productIds.includes(p.id));
     },
 };
