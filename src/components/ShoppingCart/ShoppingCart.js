@@ -47,7 +47,7 @@ const ShoppingCart = (props) => {
             <tr>
                 <td>Продукт</td>
                 <td>Количество</td>
-                <td></td>
+                <td className={styles.cartDeleteHolder}></td>
                 <td className={styles.cartPrice}>Стоимость</td>
             </tr>
             </thead>
@@ -78,7 +78,7 @@ const ShoppingCart = (props) => {
                                 className={styles.controlButton}>
                             <FontAwesomeIcon icon={faPlus}/></button>
                     </td>
-                    <td>
+                    <td className={styles.cartDeleteHolder}>
                         <button onClick={() => props.removeProduct(p.id, p.id)} title="Удалить"
                                 className={`${styles.cartDelete} ${styles.controlButton}`}>
                             <FontAwesomeIcon icon={faTrashAlt}/>

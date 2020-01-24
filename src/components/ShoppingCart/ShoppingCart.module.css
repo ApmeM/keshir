@@ -34,6 +34,12 @@
     color: #f5bb00;
 }
 
+.cartDeleteHolder {
+    max-width: 35px;
+}
+.cartDelete {
+    padding: 0;
+}
 .cartDelete:hover {
     color: #ff0000;
 }
@@ -63,6 +69,12 @@ text-align: right;
     line-height: 1;
     margin-bottom: 10px;
 }
+@media only screen and (max-width: 860px) {
+    .productName {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+}
 
 .productThumbnail {
     float: left;
@@ -70,12 +82,27 @@ text-align: right;
     height: 100px;
     margin-bottom: 10px;
 }
+@media only screen and (max-width: 860px) {
+    .productThumbnail ,
+    .cartTable .table_td img {
+        float: none;
+        max-width: 100%;
+        width: auto;
+        height: auto;
+    }
+
+}
 
 .productDescription {
     font-style: italic;
     font-size: 12px;
 }
 
+@media only screen and (max-width: 860px) {
+    .productDescription {
+        display: none;
+    }
+}
 .productPrice {
     margin-bottom: 5px;
 }

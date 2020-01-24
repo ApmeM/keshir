@@ -39,7 +39,7 @@ const Product = (props) => {
             <img src={variant.images} alt='product'/>
         </div>
         <div className={styles.productDesc}>
-            <div className={styles.productName}>{variant.name} <br/>{variant.variant}</div>
+            <div className={styles.productName}>{variant.type} {variant.name} <br/>{variant.variant}</div>
 
             <div className={styles.variants}>
                 Варианты:
