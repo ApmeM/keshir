@@ -13,9 +13,6 @@ class Nav extends React.Component {
     }
 
     render() {
-        // ToDo: move calculations to somewhere else
-        let productsCount = this.props.products.reduce((acc, value) => acc + value.count, 0);
-
         return <div className={styles.wrapper}>
             <ul>
                 <li>
@@ -29,14 +26,19 @@ class Nav extends React.Component {
                 </li>
                 <li>
                     <NavLink activeClassName={styles.active} className={styles.navCart} to="/cart"><FontAwesomeIcon
-                        icon={faShoppingCart}/> {productsCount === 0 ? "" : productsCount}</NavLink>
+                        icon={faShoppingCart}/> {this.props.productsCount === 0 ? "" : this.props.productsCount}</NavLink>
                 </li>
             </ul>
         </div>
     }
 }
 
-const mapStateToProps = state => state.shoppingCart;
+const mapStateToProps = state => {
+    return {
+        ...state.shoppingCart,
+        productsCount: state.shoppingCart.products.reduce((acc, value) => acc + value.count, 0)
+    };
+}
 export default compose(
     connect(mapStateToProps, {fetchShoppingCart})
 )(Nav)
