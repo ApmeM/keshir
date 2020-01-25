@@ -70,16 +70,16 @@ export const PureShoppingCart = (props) => {
                              className={styles.productDescription}></div>
                     </td>
                     <td>
-                        <button onClick={() => props.decreaseCount(p.id, p.id)} title="Убавить"
+                        <button onClick={() => props.decreaseCount(p.id)} title="Убавить"
                                 className={styles.controlButton} disabled={1 === p.count}>
                             <FontAwesomeIcon icon={faMinus}/></button>
                         {p.count}
-                        <button onClick={() => props.increaseCount(p.id, p.id)} title="Добавить"
+                        <button onClick={() => props.increaseCount(p.id)} title="Добавить"
                                 className={styles.controlButton} disabled={p.available === p.count}>
                             <FontAwesomeIcon icon={faPlus}/></button>
                     </td>
                     <td className={styles.cartDeleteHolder}>
-                        <button onClick={() => props.removeProduct(p.id, p.id)} title="Удалить"
+                        <button onClick={() => props.removeProduct(p.id)} title="Удалить"
                                 className={`${styles.cartDelete} ${styles.controlButton}`}>
                             <FontAwesomeIcon icon={faTrashAlt}/>
                         </button>
