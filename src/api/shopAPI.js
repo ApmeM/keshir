@@ -4,7 +4,7 @@ import {Readable} from "stream";
 
 const corsUrl = 'https://cors-anywhere.herokuapp.com/';
 
-const getCache = async ()=>{
+const getCache = async () => {
     const response = await axios.create().get(`${corsUrl}https://docs.google.com/spreadsheets/d/e/${process.env.REACT_APP_SPREADSHEET_ID}/pub?gid=${process.env.REACT_APP_SPREADSHEET_PAGE_ID}&single=true&output=csv`)
     return new Promise((resolve, reject) => {
         let currentCategory = '';
@@ -33,6 +33,11 @@ const getCache = async ()=>{
                     data.selection = [];
                 }
 
+                data.available = parseInt(data.available);
+                if (isNaN(data.available)) {
+                    data.available = undefined;
+                }
+
                 let products = results.filter((r) => r.name === data.name);
                 if (products.length === 0) {
                     let product = {...data, category: currentCategory, variants: [data]};
@@ -44,7 +49,7 @@ const getCache = async ()=>{
             .on('end', () => {
                 resolve(results);
             });
-        });
+    });
 }
 
 const cache = getCache();

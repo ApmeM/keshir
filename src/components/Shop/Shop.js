@@ -9,7 +9,7 @@ import Error from "../Error/Error";
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
 
-const Shop = (props) => {
+export const PureShop = (props) => {
     const {categoryName, currentType} = props.match.params;
     const fetchTypes = props.fetchTypes;
 
@@ -35,4 +35,4 @@ const mapStateToProps = state => state.shop;
 export default compose(
     connect(mapStateToProps, {fetchTypes, fetchProducts}),
     withRouter
-)(Shop)
+)(PureShop)

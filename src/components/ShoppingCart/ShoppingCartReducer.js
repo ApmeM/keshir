@@ -32,7 +32,7 @@ export const decreaseCount = (productId) => function (dispatch) {
 };
 export const removeProduct = (productId) => function (dispatch) {
     dispatch({type: REMOVE_PRODUCT, productId});
-    shoppingCartAPI.removeProductShoppingCart(productId, 1);
+    shoppingCartAPI.removeProductShoppingCart(productId);
 };
 
 export const fetchShoppingCartRequest = () => ({type: FETCH_SHOPPINGCART_REQUEST});
@@ -71,6 +71,19 @@ export const purchase = (contact, products) => async function (dispatch) {
     }
 };
 
+const checkProductsCount = (products, foundIndex) =>{
+    if (products[foundIndex].count > products[foundIndex].available)
+    {
+        products[foundIndex].count = products[foundIndex].available
+    }
+
+    if (products[foundIndex].count <= 0) {
+        products = products.filter(p => p.id !== products[foundIndex].id)
+    }
+
+    return products;
+}
+
 export default (state = {
     isFetching: false,
     failed: false,
@@ -103,8 +116,11 @@ export default (state = {
             if (foundIndex >= 0) {
                 products[foundIndex].count++;
             } else {
+                foundIndex = products.length;
                 products.push({...action.product, count: 1});
             }
+
+            products = checkProductsCount(products, foundIndex);
 
             return {
                 ...state,
@@ -114,12 +130,13 @@ export default (state = {
         case CHANGE_COUNT: {
             let products = [...state.products];
             let foundIndex = products.findIndex(p => p.id === action.productId);
-            if (foundIndex >= 0) {
-                products[foundIndex].count += action.count;
+            if (foundIndex < 0) {
+                return state;
             }
-            if (products[foundIndex].count === 0) {
-                products = products.filter(p => p.id !== action.productId)
-            }
+
+            products[foundIndex].count += action.count;
+
+            products = checkProductsCount(products, foundIndex);
 
             return {
                 ...state,
@@ -127,9 +144,19 @@ export default (state = {
             };
         }
         case REMOVE_PRODUCT: {
+            let products = [...state.products];
+            let foundIndex = products.findIndex(p => p.id === action.productId);
+            if (foundIndex < 0) {
+                return state;
+            }
+
+            products[foundIndex].count = 0;
+
+            products = checkProductsCount(products, foundIndex);
+
             return {
                 ...state,
-                products: state.products.filter(p => p.id !== action.productId)
+                products: products
             };
         }
         case PURCHASE_REQUEST: {

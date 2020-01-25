@@ -16,7 +16,7 @@ import {faMinus, faPlus, faTrashAlt} from '@fortawesome/free-solid-svg-icons'
 import {compose} from "redux";
 import PlaceOrderForm from "./PlaceOrderForm/PlaceOrderForm";
 
-const ShoppingCart = (props) => {
+export const PureShoppingCart = (props) => {
 
     const fetchShoppingCart = props.fetchShoppingCart;
     useEffect(()=>{
@@ -71,11 +71,11 @@ const ShoppingCart = (props) => {
                     </td>
                     <td>
                         <button onClick={() => props.decreaseCount(p.id, p.id)} title="Убавить"
-                                className={styles.controlButton}>
+                                className={styles.controlButton} disabled={1 === p.count}>
                             <FontAwesomeIcon icon={faMinus}/></button>
                         {p.count}
                         <button onClick={() => props.increaseCount(p.id, p.id)} title="Добавить"
-                                className={styles.controlButton}>
+                                className={styles.controlButton} disabled={p.available === p.count}>
                             <FontAwesomeIcon icon={faPlus}/></button>
                     </td>
                     <td className={styles.cartDeleteHolder}>
@@ -126,4 +126,4 @@ export default compose(
         fetchShoppingCart,
         purchase
     })
-)(ShoppingCart)
+)(PureShoppingCart)

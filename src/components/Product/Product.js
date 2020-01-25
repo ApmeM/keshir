@@ -9,7 +9,7 @@ import {withRouter} from "react-router-dom";
 import {compose} from "redux";
 import SelectionForm from "./SelectionForm/SelectionForm";
 
-const Product = (props) => {
+export const PureProduct = (props) => {
     const fetchProduct = props.fetchProduct;
     const productId = props.match.params.productId;
 
@@ -33,7 +33,6 @@ const Product = (props) => {
     if (variants.length !== 0) {
         variant = variants[0];
     }
-
     return <div className={styles.productWrap}>
         <div className={styles.productImage}>
             <img src={variant.images} alt='product'/>
@@ -50,8 +49,13 @@ const Product = (props) => {
                 )}
             </div>
             <div>
-                <SelectionForm selections={variant.selection} variant={variant}
-                               onSubmit={(form) => props.addProduct(variant, form)}/>
+                {
+                    (variant.available === undefined || variant.available > 0) ?
+                        <SelectionForm selections={variant.selection} variant={variant}
+                                       onSubmit={(form) => props.addProduct(variant, form)}/>
+                        :
+                        <div>Нет в наличии</div>
+                }
             </div>
 
             <p><i dangerouslySetInnerHTML={{__html: variant.description}} className={styles.productDescription}/></p>
@@ -59,10 +63,10 @@ const Product = (props) => {
                  className={styles.productCharacteristics}/>
         </div>
     </div>;
-}
+};
 
 const mapStateToProps = state => state.product;
 export default compose(
     connect(mapStateToProps, {fetchProduct, addProduct, switchVariant}),
     withRouter
-)(Product)
+)(PureProduct)
