@@ -38,12 +38,16 @@ const getCache = async () => {
                     data.available = undefined;
                 }
 
-                let products = results.filter((r) => r.name === data.name);
+                const products = results.filter((r) => r.name === data.name);
                 if (products.length === 0) {
                     let product = {...data, category: currentCategory, variants: [data]};
+                    data.productId = data.id;
+                    data.variantId = data.id;
                     results.push(product);
                 } else {
                     products[0].variants.push(data);
+                    data.productId = products[0].id;
+                    data.variantId = data.id;
                 }
             })
             .on('end', () => {

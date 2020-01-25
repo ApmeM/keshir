@@ -56,7 +56,7 @@ export const PureShoppingCart = (props) => {
             {props.products.map((p) => {
                 return <tr key={p.id}>
                     <td className={styles.table_td}>
-                        <NavLink to={`/product/${p.rawProductId}`}>
+                        <NavLink to={`/product/${p.productId}`}>
                             <img className={styles.productThumbnail} src={p.images} alt='thumbnail'/>
                             <div className={styles.productName}>{p.type} {p.name} {p.variant} </div>
                         </NavLink>

@@ -13,11 +13,11 @@ const PURCHASE_REQUEST = 'SHOPPING_CART/PURCHASE_REQUEST';
 const PURCHASE_FAILED = 'SHOPPING_CART/PURCHASE_FAILED';
 
 export const addProduct = (product, form) => function (dispatch) {
-    let productId = product.id + Object.keys(form).reduce((a, b) => {
+    let shoppingCartId = product.id + Object.keys(form).reduce((a, b) => {
         return a + b + form[b];
     }, "");
 
-    product = {...product, rawProductId: product.id, selection: form, id: productId}
+    product = {...product, selection: form, id: shoppingCartId}
 
     dispatch({type: ADD_PRODUCT, product});
     shoppingCartAPI.addProductShoppingCart(product);
@@ -58,7 +58,7 @@ export const purchase = (contact, products, total) => async function (dispatch) 
         let selectionText = Object.keys(product.selection).reduce((selectionAgg, key) => {
             return selectionAgg + key + product.selection[key];
         }, "");
-        return productAgg + `Id=${product.rawProductId} Name=${product.name} variant=${product.variant} selection=${selectionText} count=${product.count} price=${product.price} total=${product.count * product.price}\n`;
+        return productAgg + `Id=${product.variantId} Name=${product.name} variant=${product.variant} selection=${selectionText} count=${product.count} price=${product.price} total=${product.count * product.price}\n`;
     }, "");
 
     productText += `Shipping fee=300\n`
