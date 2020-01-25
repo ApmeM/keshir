@@ -103,7 +103,7 @@ export const PureShoppingCart = (props) => {
             <tfoot>
             <tr>
                 <td colSpan="4">
-                    <PlaceOrderForm onSubmit={(form) => props.purchase(form.contact, props.products)}/>
+                    <PlaceOrderForm onSubmit={(form) => props.purchase(form.contact, props.products, props.productsTotal + 300)}/>
                 </td>
             </tr>
             </tfoot>

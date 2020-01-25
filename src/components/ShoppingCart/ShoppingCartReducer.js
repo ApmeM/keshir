@@ -53,17 +53,20 @@ export const purchaseRequest = () => ({type: PURCHASE_REQUEST});
 export const purchaseSuccess = () => ({type: PURCHASE_SUCCESS});
 export const purchaseFailed = () => ({type: PURCHASE_FAILED});
 
-export const purchase = (contact, products) => async function (dispatch) {
-    let productIds = products.map(function (p) {
-        let selectionText = Object.keys(p.selection).reduce((a, b) => {
-            return a + b + p.selection[b];
+export const purchase = (contact, products, total) => async function (dispatch) {
+    let productText = products.reduce((productAgg, product) => {
+        let selectionText = Object.keys(product.selection).reduce((selectionAgg, key) => {
+            return selectionAgg + key + product.selection[key];
         }, "");
-        return `\nId=${p.rawProductId} Name=${p.name} variant=${p.variant} selection=${selectionText} count=${p.count} price=${p.price}`;
-    });
+        return productAgg + `Id=${product.rawProductId} Name=${product.name} variant=${product.variant} selection=${selectionText} count=${product.count} price=${product.price} total=${product.count * product.price}\n`;
+    }, "");
+
+    productText += `Shipping fee=300\n`
+    productText += `Total=${total}`
 
     dispatch(purchaseRequest());
     try {
-        await shoppingCartAPI.placeOrder(contact, productIds);
+        await shoppingCartAPI.placeOrder(contact, productText);
         dispatch(purchaseSuccess());
         shoppingCartAPI.cleanShoppingCart();
     } catch (error) {
