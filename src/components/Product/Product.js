@@ -54,7 +54,7 @@ export const PureProduct = (props) => {
                         <SelectionForm selections={variant.selection} variant={variant}
                                        onSubmit={(form) => props.addProduct(variant, form)}/>
                         :
-                        <div>Нет в наличии</div>
+                        <></>
                 }
             </div>
 
