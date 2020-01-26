@@ -15,6 +15,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faMinus, faPlus, faTrashAlt} from '@fortawesome/free-solid-svg-icons'
 import {compose} from "redux";
 import PlaceOrderForm from "./PlaceOrderForm/PlaceOrderForm";
+import {Price} from "../Common/Price/Price";
 
 export const PureShoppingCart = (props) => {
 
@@ -63,9 +64,8 @@ export const PureShoppingCart = (props) => {
                         <div>{Object.keys(p.selection).map((b) => {
                             return <div key={b}>{b} {p.selection[b]}</div>;
                         }, "")}</div>
-                        <div className={styles.productPrice}>
-                            <div>{p.price}&nbsp;</div>
-                            {p.currency}</div>
+
+                        <Price price={p.price} originalPrice={p.originalPrice} currency={p.currency}/>
                         <div dangerouslySetInnerHTML={{__html: p.description}}
                              className={styles.productDescription}></div>
                     </td>

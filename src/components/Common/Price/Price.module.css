@@ -1,0 +1,9 @@
+.productPriceValue {
+    font-weight: 800;
+    display: inline;
+}
+
+.productOriginalPriceValue {
+    display: inline;
+    text-decoration: line-through;
+}

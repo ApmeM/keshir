@@ -2,6 +2,7 @@ import React from "react";
 import Error from "../Error/Error";
 import styles from './ProductCard.module.css'
 import {NavLink} from "react-router-dom";
+import {Price} from "../Common/Price/Price";
 
 const ProductCard = (props) => {
     if (props.productCard === undefined) {
@@ -14,8 +15,8 @@ const ProductCard = (props) => {
             <div className={styles.productName}>{props.productCard.type} {props.productCard.name}</div>
         </NavLink>
         <div className={styles.productPrice}>
-            <span className={styles.productPriceValue}>{props.productCard.price}&nbsp;</span>
-            {props.productCard.currency}</div>
+            <Price price={props.productCard.price} originalPrice={props.productCard.originalPrice} currency={props.productCard.currency}/>
+        </div>
         <div dangerouslySetInnerHTML={{__html: props.productCard.description}}
              className={styles.productDescription}></div>
     </div>;

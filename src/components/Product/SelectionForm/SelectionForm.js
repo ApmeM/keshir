@@ -5,6 +5,7 @@ import {Field, reduxForm} from "redux-form";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
 import {required} from "../../../utils/validators";
+import {Price} from "../../Common/Price/Price";
 
 const SelectionForm = (props) => {
     return <form onSubmit={props.handleSubmit}>
@@ -22,8 +23,7 @@ const SelectionForm = (props) => {
         })}
 
         <p className={styles.productPrice}>
-            <span className={styles.productPriceValue}>{props.variant.price}&nbsp;</span>
-            {props.variant.currency}
+            <Price price={props.variant.price} originalPrice={props.variant.originalPrice} currency={props.variant.currency}/>
             <button className={styles.addCart} disabled={props.invalid || props.submitting}><FontAwesomeIcon
                 icon={faArrowRight} title="Добавить в корзину"
             />&nbsp;Добавить в корзину

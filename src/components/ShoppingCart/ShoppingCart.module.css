@@ -103,14 +103,6 @@ text-align: right;
         display: none;
     }
 }
-.productPrice {
-    margin-bottom: 5px;
-}
-
-.productPrice div {
-    font-weight: 800;
-    display: inline;
-}
 
 .table_td {
     display: inline-block;
