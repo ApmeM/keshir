@@ -15,7 +15,11 @@ const getCache = async () => {
         s.pipe(csv())
             .on('data', (data) => {
                 if (data.id === "") {
-                    currentCategory = data.name;
+                    if (data.name.startsWith('-')){
+                        currentCategory = {name: data.name.substr(1), isHeader: false};
+                    }else{
+                        currentCategory = {name: data.name, isHeader: true};
+                    }
                     return;
                 }
 
@@ -65,7 +69,7 @@ export const shopAPI = {
     async getTypes(categoryName) {
         const products = await cache;
         const result = products
-            .filter(p => p.category === categoryName)
+            .filter(p => p.category.name === categoryName)
             .map(p => p.type)
             .filter(p => p !== "")
             .filter((elem, pos, arr) => arr.indexOf(elem) === pos);
@@ -75,11 +79,16 @@ export const shopAPI = {
 
     async getProducts(categoryName, typeName) {
         const products = await cache;
-        return products.filter(p => p.category === categoryName && (p.type === typeName || typeName === "All"));
+        return products.filter(p => p.category.name === categoryName && (p.type === typeName || typeName === "All"));
     },
 
     async getNews(productIds) {
         const products = await cache;
         return products.filter(p => productIds.includes(p.id));
     },
+
+    async fetchCategories() {
+        const products = await cache;
+        return products.map(p => p.category).filter((elem, pos, arr) => arr.indexOf(elem) === pos);
+    }
 };
