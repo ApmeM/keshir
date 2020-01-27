@@ -2,18 +2,17 @@
 
 # Description 
 
-Serverless E-shop website. All server-side functions (product database, order storage) are handled by google services:
-- For products source - Google spreadsheed csv exported file
+Serverless E-shop website. All server-side functions (product database, order storage) are handled by someone else services (like Google):
+- For products csv file source you can use Google spreadsheed csv exported file
 - For order placing - Google form with 2 fields
 
-Configuration stored in [.env](https://github.com/ApmeM/keshir/blob/master/.env) file:
+Basic configuration stored in [.env](https://github.com/ApmeM/keshir/blob/master/.env) file:
 ```
 REACT_APP_LOGO - Text that is displayed in page title, header and footer
-REACT_APP_FORM_ID - Id of a google form store orders information. Can be found in network tab when posting form from web.
-REACT_APP_FORM_CONTACT_ID - Id of a google form field to store contact information. Can be found in network tab when posting form from web.
-REACT_APP_FORM_PRODUCTS_ID - Id of a google form field to store selected products information. Can be found in network tab when posting form from web.
-REACT_APP_SPREADSHEET_ID - Id of a google spreadsheet that have csv export enabled to get products
-REACT_APP_SPREADSHEET_PAGE_ID - Id of a page in a google spreadsheet that have csv export enabled to get products
+REACT_APP_CSV_URL - Url to download csv product files example of the file located in [public](https://github.com/ApmeM/keshir/blob/master/public/products.csv) folder
+REACT_APP_ORDER_URL - Url to post selected products
+REACT_APP_ORDER_URL_CONTACT_NAME - field name for contact information
+REACT_APP_ORDER_URL_PRODUCTS_NAME - field name for selected products data
 ```
 
 Deployed to firebase using npm firebase-tools package and github actions.
